@@ -49,6 +49,16 @@ return [
             'driver' => 'session',
             'provider' => 'doctors',
         ],
+
+        'reception' => [
+            'driver' => 'session',
+            'provider' => 'receptions',
+        ],
+
+        'storeKeeperEmployee' => [
+            'driver' => 'session',
+            'provider' => 'storeKeeperEmployees',
+        ],
     ],
 
      
@@ -89,6 +99,16 @@ return [
         'doctors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Doctor::class,
+        ],
+
+        'storeKeeperEmployees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\StoreKeeperEmployee::class,
+        ],
+
+        'receptions' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Receptionist::class,
         ],
     ],
 
