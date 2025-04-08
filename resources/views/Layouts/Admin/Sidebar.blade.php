@@ -149,6 +149,23 @@
         </details>
       </li>
       <li class="sidebar-item">
+        <details>
+          <summary class="sidebar-link">
+            <span>
+              <i class="ti ti-building"></i>
+            </span>
+            <span class="hide-menu">Appointment</span>
+          </summary>
+          <ul style="padding-left: 1rem; list-style: none;">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{route('admin.appointment.index')}}">
+                <span class="hide-menu">Appointment Table</span>
+              </a>
+            </li>
+          </ul>
+        </details>
+      </li>
+      <li class="sidebar-item">
         <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
           <span>
             <i class="ti ti-alert-circle"></i>
