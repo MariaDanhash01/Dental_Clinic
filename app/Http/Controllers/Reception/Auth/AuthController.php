@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Reception\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Admin;
 
 class AuthController extends Controller
 {
@@ -13,18 +12,18 @@ class AuthController extends Controller
 
     public function loginPage()
     {
-      return view('Admin.Auth.login');
+      return view('Reception.Auth.login');
     }
     
     public function login(Request $request)
     {
         $check = $request->all();
 
-        if (Auth::guard('admin')->attempt([
+        if (Auth::guard('reception')->attempt([
             'email' => $check['email'],
             'password' => $check['password']
         ])) {
-            return redirect()->route('admin.index');
+            return redirect()->route('reception.index');
         } else {
             return redirect()->back()->with('error_message', 'Invalid email or password');
         }
@@ -32,7 +31,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
-        return redirect()->route('admin.login.page');
+        Auth::guard('reception')->logout();
+        return redirect()->route('reception.login.page');
     }
 }
