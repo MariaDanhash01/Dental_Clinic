@@ -72,19 +72,22 @@
                           <h6 class="fw-semibold mb-0">ID</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">NAME</h6>
+                          <h6 class="fw-semibold mb-0">Day</h6>
                         </th>
                         <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">CODE</h6>
+                            <h6 class="fw-semibold mb-0">Start Time</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Clinics</h6>
+                          <h6 class="fw-semibold mb-0">End Time</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Patient Number</h6>
                       </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">CREATED BY</h6>
+                          <h6 class="fw-semibold mb-0">Clinic Number</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">ACTION</h6>
+                          <h6 class="fw-semibold mb-0">Doctor Number</h6>
                         </th>
                       </tr>
                     </thead>
@@ -95,32 +98,9 @@
                                           <td>{{$appointment->day}}</td>
                                           <td>{{$appointment->start_time}}</td>
                                           <td>{{$appointment->end_time}}</td>
-                                          <td>{{$appointment->code}}</td>
-                                          <td>{{$appointment->clinic->pluck('name')->implode(', ') ?: '-' }}</td>
-                                          <td>{{$appointment->doctor->name ?? '-'}}</td>
+                                          <td>{{$appointment->patient->id ?? '-'}}</td>
                                           <td>{{$appointment->clinic->name ?? '-'}}</td>
-                                          <td>{{$appointment->patient->name ?? '-'}}</td>
-
-                                          <td>
-                                              <div class="dropdown">
-                                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                      <i class="bx bx-dots-vertical-rounded"></i>
-                                                  </button>
-                                                  <div class="dropdown-menu">
-                                                      {{-- <form method="post" action="{{route('admin.appointment.delete' ,$appointment->id)}}"> --}}
-                                                          @csrf
-                                                          @method('delete')
-                                                          <button class="dropdown-item btn" type="submit">
-                                                              <i class="bx bx-trash me-1"></i> Delete
-                                                          </button>
-                                                      </form>                                                        
-                                                        {{-- <a href="{{route('admin.appointment.edit',$appointment->id)}}" class="dropdown-item btn" type="submit"> --}}
-                                                            <i class="bx bx-trash me-1"></i> Edit
-                                                        </a>
-                                                    
-                                                  </div>
-                                              </div>
-                                          </td>
+                                          <td>{{$appointment->doctor->name ?? '-'}}</td>
                                       </tr>
                                   @endforeach                    
                     </tbody>
