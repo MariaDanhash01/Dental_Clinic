@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\ClinicController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DoctorController;
@@ -125,7 +126,12 @@ Route::group([ 'middleware' => 'admin.auth'], function () {
         Route::get('/edit/{id}', 'edit')->name('edit');
 
         Route::put('/update/{id}', 'update')->name('update');
-    });       
+    });     
+    
+    Route::group(['prefix' => 'appointment', 'as' => 'appointment.', 'controller' => AppointmentController::class], function () {
+
+        Route::get('/index', 'index')->name('index');
+    });  
 });
 
  
