@@ -41,7 +41,6 @@
    
           <div class="card">
             <div class="card-body">
-
                {{-- message Section --}}
           @if (session('success_message'))
           <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -58,10 +57,10 @@
       @endif
       {{-- end message Section --}}
       
-              <h5 class="card-title fw-semibold mb-4">Create Store Keeper Employee</h5>
+              <h5 class="card-title fw-semibold mb-4">Create Nurse</h5>
                 {{-- <div class="card-body"> --}}
-                    <form method="post" action="{{route('admin.storeKeeperEmployee.store')}}" enctype="multipart/form-data">
-                        @csrf     
+                    <form method="post" action="{{route('admin.nurse.store')}}" enctype="multipart/form-data">
+                        @csrf 
                         @if ($errors->any())
                         <div class="alert alert-danger">
                           <ul class="mb-0">
@@ -70,7 +69,7 @@
                             @endforeach
                           </ul>
                         </div>  
-                        @endif                                        
+                        @endif                                            
                         <div class="d-flex gap-3">
                             <div class="mb-3 w-50">
                                 <label for="name" class="form-label">Name</label>
@@ -80,7 +79,10 @@
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
-                            
+                            <div class="mb-3 w-50">
+                              <label for="" class="form-label">Upload image</label>
+                              <input type="file" class="form-control" id="basic-icon-default-image" name="img" required>
+                          </div>
                         </div>                        
                         <div class="d-flex gap-3">
                             <div class="mb-3 w-50">
@@ -115,15 +117,21 @@
                                     <option value="0">Male</option>
                                 </select>
                             </div>
-                            <div class="mb-3 w-50">
-                                <label for="" class="form-label">Upload image</label>
-                                <input type="file" class="form-control" id="basic-icon-default-image" name="img" required>
-                            </div>
+                            <di class="mb-3 w-50">
+                              <label for="dentistSpecialization" class="form-label">Name of Department</label>
+                              <select name="department_id" class="form-control" id="dentistSpecialization">
+                                  <option value="" selected disabled>Select Deparment</option>
+                                  @foreach($departments as $department)
+                                      <option value="{{ $department->id }}">
+                                          {{ $department->name }}
+                                      </option>
+                                  @endforeach
+                              </select>
+                            </di>
                         </div>                        
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
-              
             </div>
           </div>
       </div>

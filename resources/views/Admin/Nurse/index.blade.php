@@ -63,7 +63,7 @@
       @endif
       {{-- end message Section --}}
   
-                <h5 class="card-title fw-semibold mb-4">Specialization Table</h5>
+                <h5 class="card-title fw-semibold mb-4">Nurse Table</h5>
                 <div class="table-responsive">
                   <table class="table text-nowrap mb-0 align-middle">
                     <thead class="text-dark fs-4">
@@ -72,10 +72,28 @@
                           <h6 class="fw-semibold mb-0">ID</h6>
                         </th>
                         <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Image</h6>
+                        </th>
+                        <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Name</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Description</h6>
+                            <h6 class="fw-semibold mb-0">Email</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Gender</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Status</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Age</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Phone</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Department</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Created By</h6>
@@ -92,28 +110,50 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($specializations as $specialization)
+                      @foreach($nurses as $nurse)
                                       <tr>
-                                          <th scope="row">{{$specialization->id}}</th>
-                                          <td>{{$specialization->name}}</td>
-                                          <td>{{$specialization->description}}</td>
-                                          <td>{{$specialization->admin->name ?? '-'}}</td>
-                                          <td>{{$specialization->created_at}}</td>
-                                          <td>{{$specialization->updated_at}}</td>
+                                          <th scope="row">{{$nurse->id}}</th>
+                                          <td>
+                                            <img src="{{ asset('image/' . $nurse->img) }}"
+                                                 style="width: 50px; height: 50px; object-fit: cover;">
+                                        </td>
+                                        
+                                          <td>{{$nurse->name}}</td>
+                                          <td>{{$nurse->email}}</td>
+                                          <td>
+                                            @if ($nurse->gender == 1)
+                                                Female
+                                            @else
+                                                Male
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($nurse->status == 1)
+                                                <div class="btn btn-success">Active</div>
+                                            @else
+                                                <div class="btn btn-danger">Not Active</div>
+                                            @endif
+                                        </td>
+                                          <td>{{$nurse->age}}</td>
+                                          <td>{{$nurse->phone}}</td>
+                                          <td>{{$nurse->depatrment->name ?? '-'}}</td>
+                                          <td>{{$nurse->admin->name ?? '-'}}</td>
+                                          <td>{{$nurse->created_at}}</td>
+                                          <td>{{$nurse->updated_at}}</td>
                                           <td>
                                               <div class="dropdown">
                                                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                       <i class="bx bx-dots-vertical-rounded"></i>
                                                   </button>
                                                   <div class="dropdown-menu">
-                                                      <form method="post" action="{{route('admin.specialization.delete' ,$specialization->id)}}">
+                                                      <form method="post" action="{{route('admin.nurse.delete' ,$nurse->id)}}">
                                                           @csrf
                                                           @method('delete')
                                                           <button class="dropdown-item btn" type="submit">
                                                               <i class="bx bx-trash me-1"></i> Delete
                                                           </button>
                                                       </form>                                                        
-                                                        <a href="{{route('admin.specialization.edit',$specialization->id)}}" class="dropdown-item btn" type="submit">
+                                                        <a href="{{route('admin.nurse.edit',$nurse->id)}}" class="dropdown-item btn" type="submit">
                                                             <i class="bx bx-trash me-1"></i> Edit
                                                         </a>
                                                     

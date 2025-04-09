@@ -41,10 +41,36 @@
    
           <div class="card">
             <div class="card-body">
+
+               {{-- message Section --}}
+          @if (session('success_message'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success_message') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+  
+      @if (session('error_message'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error_message') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+      {{-- end message Section --}}
+      
               <h5 class="card-title fw-semibold mb-4">Create Doctor</h5>
                 {{-- <div class="card-body"> --}}
                     <form method="post" action="{{route('admin.doctor.store')}}" enctype="multipart/form-data">
-                        @csrf                                            
+                        @csrf  
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                          <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                              <li>{{$error}}</li>
+                            @endforeach
+                          </ul>
+                        </div>  
+                        @endif                                           
                         <div class="d-flex gap-3">
                             <div class="mb-3 w-50">
                                 <label for="name" class="form-label">Name</label>
@@ -103,16 +129,17 @@
                                   @endforeach
                               </select>
                           </div>
-                          
-                            <div class="mb-3 w-50">
-                              <label for="dentistSpecialization" class="form-label"> Department</label>
-                              <select name="specialization_id" class="form-control" id="dentistDepartment">
-                                  <option value="" selected disabled>Select Department</option>
-                                  <option value="1">First Deparment</option>
-                                  <option value="2">Second Deparment</option>
-                                  <option value="3">Third Deparment</option>
-                              </select>
-                          </div>
+                          <di class="mb-3 w-50">
+                            <label for="dentistSpecialization" class="form-label">Name of Department</label>
+                            <select name="department_id" class="form-control" id="dentistSpecialization">
+                                <option value="" selected disabled>Select Deparment</option>
+                                @foreach($departments as $department)
+                                    <option value="{{ $department->id }}">
+                                        {{ $department->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                          </di>
                         </div>                        
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

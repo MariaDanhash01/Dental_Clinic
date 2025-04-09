@@ -54,15 +54,21 @@ class ClinicController extends Controller
 
         $clinic = Clinic::findOrFail($id);
 
-            $clinic->update([
-                'name' => $request->input('name'),
-                'code' => $request->input('code'),
-                'department_id' => $request->input('department_id'),
+        $validatedData=$request->validate([
+            'name' => 'required|string|max:200',
+            'code' => 'required|string',
+            'department_id' => 'required',
+        ]);
 
-            ]);
+        $clinic->update([
+            'name' => $validatedData['name'],
+            'code' => $validatedData['code'],
+            'department_id' =>$validatedData['department_id'],
+            'created_by' => Auth::guard('admin')->user()->id,
+        ]);
+
             return redirect()->route('admin.clinic.index')->with('success_message', 'Clinic Updated Successfully');
     }
-
     public function delete($id)
     {
         $clinic = Clinic::findOrFail($id);

@@ -63,7 +63,7 @@
       @endif
       {{-- end message Section --}}
   
-                <h5 class="card-title fw-semibold mb-4">Department Table</h5>
+                <h5 class="card-title fw-semibold mb-4">Clinic Table</h5>
                 <div class="table-responsive">
                   <table class="table text-nowrap mb-0 align-middle">
                     <thead class="text-dark fs-4">
@@ -72,7 +72,7 @@
                           <h6 class="fw-semibold mb-0">ID</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">NAME</h6>
+                          <h6 class="fw-semibold mb-0">Name</h6>
                         </th>
                         <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">CODE</h6>
@@ -82,6 +82,12 @@
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">CREATED BY</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Created Date</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Last Updated Date</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">ACTION</h6>
@@ -96,6 +102,8 @@
                                           <td>{{$clinic->code}}</td>
                                           <td>{{$clinic->department->name}}</td>
                                           <td>{{$clinic->admin->name ?? '-'}}</td>
+                                          <td>{{$clinic->created_at}}</td>
+                                          <td>{{$clinic->updated_at}}</td>
                                           <td>
                                               <div class="dropdown">
                                                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

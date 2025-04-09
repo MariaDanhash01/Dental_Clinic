@@ -40,11 +40,35 @@
       <div class="container-fluid">
           <div class="card">
             <div class="card-body">
+               {{-- message Section --}}
+          @if (session('success_message'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success_message') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+  
+      @if (session('error_message'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error_message') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+      {{-- end message Section --}}
               <h5 class="card-title fw-semibold mb-4">Edit Store Keeper Employee Information</h5>
               <div class="card-body">
                 <form method="post" action="{{ route('admin.storeKeeperEmployee.update', $storeKeeperEmployee->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                          <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                              <li>{{$error}}</li>
+                            @endforeach
+                          </ul>
+                        </div>  
+                        @endif 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="name" class="form-label">Name</label>
