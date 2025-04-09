@@ -41,6 +41,21 @@
    
         <div class="card" style="box-shadow: 5px 5px 20px gray;">
             <div class="card-body">
+               {{-- message Section --}}
+          @if (session('success_message'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success_message') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+  
+      @if (session('error_message'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error_message') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+      {{-- end message Section --}}
               <h5 class="card-title fw-semibold mb-4">Create Department</h5>
             
                 {{-- <div class="card-body"> --}}

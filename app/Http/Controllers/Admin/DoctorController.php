@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class DoctorController extends Controller
     public function create()
     {
         $specializations = Specialization::all();
-        return view('Admin.Doctor.create',compact('specializations'));
+        $departments = Department::all();
+        return view('Admin.Doctor.create',compact('specializations', 'departments'));
     }
     public function store(Request $request)
     {
@@ -62,8 +64,10 @@ class DoctorController extends Controller
     {
     $doctor = Doctor::findOrFail($id);
     $specializations = Specialization::all();
+    $departments = Department::all();
 
-    return view('Admin.Doctor.edit', compact('doctor', 'specializations'));
+
+    return view('Admin.Doctor.edit', compact('doctor', 'specializations' , 'departments'));
     }
     public function update(Request $request, $id)
     {
@@ -106,7 +110,7 @@ class DoctorController extends Controller
             } else {
 
                 $image = $request->file('img')->getClientOriginalName();
-                $path = $request->file('img')->storeAs('TeacherImage', $image, 'image');
+                $path = $request->file('img')->storeAs('DoctorImage', $image, 'image');
 
                 $doctor->update([
                     'name' => $request->input('name'),

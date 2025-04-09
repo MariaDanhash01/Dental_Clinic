@@ -42,6 +42,28 @@
         <details>
           <summary class="sidebar-link">
             <span>
+              <i class="ti ti-medical-cross"></i>
+            </span>
+            <span class="hide-menu">Nurse</span>
+          </summary>
+          <ul style="padding-left: 1rem; list-style: none;">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{route('admin.nurse.index')}}">
+                <span class="hide-menu">Nurse Table</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{route('admin.nurse.create')}}">
+                <span class="hide-menu">Create Nurse</span>
+              </a>
+            </li>
+          </ul>
+        </details>
+      </li>
+      <li class="sidebar-item">
+        <details>
+          <summary class="sidebar-link">
+            <span>
               <i class="ti ti-clipboard-check"></i> 
             </span>
             <span class="hide-menu">Receptionist</span>
@@ -108,8 +130,18 @@
         <details>
           <summary class="sidebar-link">
             <span>
-              <i class="ti ti-building"></i>
-            </span>
+              <span>
+                <!-- Replace with SVG icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hospital" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 21l18 0" />
+                  <path d="M5 21v-14l7 -4l7 4v14" />
+                  <path d="M9 21v-8h6v8" />
+                  <path d="M10 12h4" />
+                  <path d="M12 10v4" />
+                </svg>
+              </span>
+                          </span>
             <span class="hide-menu">clinic</span>
           </summary>
           <ul style="padding-left: 1rem; list-style: none;">
@@ -130,7 +162,7 @@
         <details>
           <summary class="sidebar-link">
             <span>
-              <i class="ti ti-building"></i>
+              <i class="ti ti-user"></i>
             </span>
             <span class="hide-menu">Store Keeper Employee</span>
           </summary>
@@ -148,11 +180,12 @@
           </ul>
         </details>
       </li>
+      
       <li class="sidebar-item">
         <details>
           <summary class="sidebar-link">
             <span>
-              <i class="ti ti-building"></i>
+              <i class="ti ti-calendar-event"></i>
             </span>
             <span class="hide-menu">Appointment</span>
           </summary>
@@ -165,6 +198,7 @@
           </ul>
         </details>
       </li>
+      
       <li class="sidebar-item">
         <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
           <span>

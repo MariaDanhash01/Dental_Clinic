@@ -71,10 +71,11 @@
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">ID</h6>
                         </th>
-                        <th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Image</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">NAME</h6>
+                          <h6 class="fw-semibold mb-0">Name</h6>
                         </th>
                         <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">Email</h6>
@@ -93,6 +94,12 @@
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Created By</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Created Date</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Last Updated Date</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Action</h6>
@@ -127,6 +134,8 @@
                                           <td>{{$receptionist->age}}</td>
                                           <td>{{$receptionist->phone}}</td>
                                           <td>{{$receptionist->admin->name ?? '-'}}</td>
+                                          <td>{{$receptionist->created_at}}</td>
+                                          <td>{{$receptionist->updated_at}}</td>
                                           <td>
                                               <div class="dropdown">
                                                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

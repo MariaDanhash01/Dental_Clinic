@@ -17,12 +17,10 @@ class DepartmentController extends Controller
         $departments = Department::all();
         return view("Admin.Department.index",compact('departments'));
     }
-
     public function create()
     {
         return view('Admin.Department.create');
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -38,7 +36,6 @@ class DepartmentController extends Controller
     
         return redirect()->route('admin.department.index')->with('success_message', 'Department Created Successfully');
     }
-
     public function edit($id)
     {
         $department = Department::findOrfail($id);
@@ -48,15 +45,22 @@ class DepartmentController extends Controller
     {
 
         $department = Department::findOrFail($id);
-
+        $validatedData=$request->validate([
+            'name' => 'required|string|max:200',
+            'code' => 'required|string',
+        ]);
             $department->update([
                 'name' => $request->input('name'),
                 'code' => $request->input('code'),
 
             ]);
+            $department->update([
+                'name' => $validatedData['name'],
+                'code' => $validatedData['code'],
+                'created_by' => Auth::guard('admin')->user()->id,
+            ]);
             return redirect()->route('admin.department.index')->with('success_message', 'Department Updated Successfully');
     }
-
     public function delete($id)
     {
         $department = Department::findOrFail($id);

@@ -89,6 +89,12 @@
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Doctor Number</h6>
                         </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Created Date</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Last Updated Date</h6>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -101,6 +107,9 @@
                                           <td>{{$appointment->patient->id ?? '-'}}</td>
                                           <td>{{$appointment->clinic->name ?? '-'}}</td>
                                           <td>{{$appointment->doctor->name ?? '-'}}</td>
+                                          <td>{{$appointment->created_at}}</td>
+                                          <td>{{$appointment->updated_at}}</td>
+
                                       </tr>
                                   @endforeach                    
                     </tbody>

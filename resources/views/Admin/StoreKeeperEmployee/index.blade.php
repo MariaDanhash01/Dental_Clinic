@@ -71,10 +71,11 @@
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">ID</h6>
                         </th>
-                        <th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Image</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">NAME</h6>
+                          <h6 class="fw-semibold mb-0">Name</h6>
                         </th>
                         <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">Email</h6>
@@ -93,6 +94,12 @@
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Created By</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Created Date</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Last Updated Date</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Action</h6>
@@ -127,6 +134,8 @@
                                           <td>{{$storeKeeperEmployee->age}}</td>
                                           <td>{{$storeKeeperEmployee->phone}}</td>
                                           <td>{{$storeKeeperEmployee->admin->name ?? '-'}}</td>
+                                          <td>{{$storeKeeperEmployee->created_at}}</td>
+                                          <td>{{$storeKeeperEmployee->updated_at}}</td>
                                           <td>
                                               <div class="dropdown">
                                                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -136,6 +145,7 @@
                                                       <form method="post" action="{{route('admin.storeKeeperEmployee.delete' ,$storeKeeperEmployee->id)}}">
                                                           @csrf
                                                           @method('delete')
+                                                          
                                                           <button class="dropdown-item btn" type="submit">
                                                               <i class="bx bx-trash me-1"></i> Delete
                                                           </button>
