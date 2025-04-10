@@ -63,6 +63,39 @@
             </details>
         </li>
 
+        <li class="sidebar-item">
+            <details class="sidebar-details">
+                <summary class="sidebar-link">
+                    <span>
+                        <i class="ti ti-send"></i>
+                    </span>
+                    <span class="hide-menu">Supplies Request</span>
+                    <i class="ti ti-chevron-down arrow-icon"></i>
+                </summary>
+                <ul style="padding-left: 1rem; list-style: none;">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('storeKeeperEmployee.supplies.request.index') }}">
+                            <span class="hide-menu">All</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('storeKeeperEmployee.supplies.request.index', 'pending') }}">
+                            <span class="hide-menu">Pending</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('storeKeeperEmployee.supplies.request.index', 'cancelled') }}">
+                            <span class="hide-menu">Cancelled</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('storeKeeperEmployee.supplies.request.index', 'completed') }}">
+                            <span class="hide-menu">Completed</span>
+                        </a>
+                    </li>
+                </ul>
+            </details>
+        </li>
 
     </ul>
 
