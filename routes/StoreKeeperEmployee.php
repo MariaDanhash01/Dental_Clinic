@@ -3,6 +3,7 @@
 use App\Http\Controllers\StoreKeeperEmployee\Auth\AuthController;
 use App\Http\Controllers\StoreKeeperEmployee\MedicalSupplies\MedicalSuppliesController;
 use App\Http\Controllers\StoreKeeperEmployee\StoreKeeperEmployeeController;
+use App\Http\Controllers\StoreKeeperEmployee\SuppliesRequest\SuppliesRequestController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,5 +36,19 @@ Route::group([ 'middleware' => 'storeKeeperEmployee.auth'], function () {
         Route::put('/update/{id}', 'update')->name('update');
 
     });
+
+        //=================================== Supplies Request Route =============================
+
+        Route::group(['prefix' => 'SuppliesRequest', 'as' => 'supplies.request.', 'controller' => SuppliesRequestController::class], function () { 
+
+            Route::get('/index/{status?}', 'index')->name('index')->defaults('status', 'all');
+    
+            Route::put('/approv/{id}', 'approve')->name('approve');
+    
+            Route::put('/reject/{id}','reject')->name('reject');
+    
+            Route::put('/return/{id}','return')->name('return');
+
+        });
 
 });
