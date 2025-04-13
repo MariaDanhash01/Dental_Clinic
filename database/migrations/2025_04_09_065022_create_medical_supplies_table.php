@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('type' , ['device' , 'material' , 'equipment' , 'medicine']);
             $table->string('description')->nullable();
             $table->integer('quantity');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('store_keeper_employees')->nullOnDelete();
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Receptionist;
+use App\Models\SuppliesRequest;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -28,8 +29,11 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             DoctorSeeder::class,
             StoreKeeperEmployeeSeeder::class,
+            MedicalSuppliesSeeder::class,
+            SuppliesRequestSeeder::class,
             PatientSeeder::class,
-            // AppointmentSeeder::class
+            ClinicSeeder::class,
+            AppointmentSeeder::class,
         ]);
     }
 }
