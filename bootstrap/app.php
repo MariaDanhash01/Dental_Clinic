@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminAuthMiddleware;
+use App\Http\Middleware\PatientAuthMiddleware;
 use App\Http\Middleware\ReceptionAuthMiddleware;
 use App\Http\Middleware\StoreKeeperEmployeeAuthMiddleware;
 use Illuminate\Foundation\Application;
@@ -28,6 +29,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->prefix('storeKeeperEmployee')
                 ->name('storeKeeperEmployee.')
                 ->group(base_path('routes/StoreKeeperEmployee.php'));
+
+                Route::middleware('web')
+                ->prefix('patient')
+                ->name('patient.')
+                ->group(base_path('routes/web.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
@@ -35,7 +41,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => AdminAuthMiddleware::class,
             'reception.auth' => ReceptionAuthMiddleware::class,
-            'storeKeeperEmployee.auth' => StoreKeeperEmployeeAuthMiddleware::class
+            'storeKeeperEmployee.auth' => StoreKeeperEmployeeAuthMiddleware::class,
+            'patient.auth' => PatientAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

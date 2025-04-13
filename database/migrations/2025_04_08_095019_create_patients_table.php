@@ -14,6 +14,13 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->tinyInteger('gender');
+            $table->tinyInteger('status');
+            $table->integer('age');
+            $table->integer('phone');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

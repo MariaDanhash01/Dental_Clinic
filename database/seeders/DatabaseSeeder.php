@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             DoctorSeeder::class,
             StoreKeeperEmployeeSeeder::class,
+            PatientSeeder::class,
             // AppointmentSeeder::class
         ]);
     }
