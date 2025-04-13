@@ -18,19 +18,7 @@ class Patient extends Authenticatable
         'age',
         'phone',
         'img',
-    ];
-
-
-    protected $fillable=[
-        'name',
-        'email',
-        'password',
-        'gender',
-        'status',
-        'age',
-        'phone',
-        'img',
-    ];
+        ];
     
 
     public function appointment()

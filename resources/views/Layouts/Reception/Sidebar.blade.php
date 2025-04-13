@@ -35,33 +35,33 @@
           }
       </style>
 
-    <!-- <li class="sidebar-item">
+    <li class="sidebar-item">
           <details class="sidebar-details">
               <summary class="sidebar-link">
                   <span>
-                    <i class="ti ti-first-aid-kit"></i>
+                    <i class="ti ti-medical-cross"></i>
 
                   </span>
-                  <span class="hide-menu"></span>
+                  <span class="hide-menu">Service</span>
                   <i class="ti ti-chevron-down arrow-icon"></i>
               </summary>
               <ul style="padding-left: 1rem; list-style: none;">
                  
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('storeKeeperEmployee.medicalSupplies.index') }}">
-                          <span class="hide-menu">Medical Supplies Table</span>
+                      <a class="sidebar-link" href="{{ route('reception.service.index') }}">
+                          <span class="hide-menu">Service Table</span>
                       </a>
                   </li>
 
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('storeKeeperEmployee.medicalSupplies.create') }}">
-                          <span class="hide-menu">Create Medical Supplies</span>
+                      <a class="sidebar-link" href="{{ route('reception.service.create') }}">
+                          <span class="hide-menu">Create Service</span>
                       </a>
                   </li>
 
               </ul>
           </details>
-      </li>  -->
+      </li> 
 
       <li class="sidebar-item">
           <details class="sidebar-details">

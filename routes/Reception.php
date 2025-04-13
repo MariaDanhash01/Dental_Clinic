@@ -4,6 +4,7 @@ use App\Http\Controllers\Reception\Appointment\AppointmentController;
 use App\Http\Controllers\Reception\Auth\AuthController;
 use App\Http\Controllers\Reception\ReceptionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Reception\Service\ServiceController;
 
 
 Route::get('/login' , [AuthController::class , 'loginPage'])->name('login.page');
@@ -21,15 +22,40 @@ Route::group([ 'middleware' => 'reception.auth'], function () {
 
        //=================================== Appointment Route =============================
 
-       Route::group(['prefix' => 'appointments', 'as' => 'appointments.'], function () {
-           Route::get('/create', [AppointmentController::class, 'create'])->name('create');
-           Route::get('/{status?}', [AppointmentController::class, 'index'])->name('index')->defaults('status', 'all');
-           Route::post('/', [AppointmentController::class, 'store'])->name('store');
-           Route::get('/{appointment}/edit', [AppointmentController::class, 'edit'])->name('edit');
-           Route::put('/{appointment}', [AppointmentController::class, 'update'])->name('update');
-           Route::put('/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('cancel');
-           Route::put('/{appointment}/complete', [AppointmentController::class, 'complete'])->name('complete');
-       });
+       Route::group(['prefix' => 'appointments', 'as' => 'appointments.', 'controller' => AppointmentController::class], function () { 
 
+           Route::get('/create',  'create')->name('create');
+
+           Route::get('/{status?}', 'index')->name('index')->defaults('status', 'all');
+
+           Route::post('/store','store')->name('store');
+
+           Route::get('/{appointment}/edit', 'edit')->name('edit');
+
+           Route::put('/{appointment}', 'update')->name('update');
+
+           Route::put('/{appointment}/cancel', 'cancel')->name('cancel');
+
+           Route::put('/{appointment}/complete', 'complete')->name('complete');
+
+    });
+
+        //=================================== Service Route =============================
+
+        Route::group(['prefix' => 'service', 'as' => 'service.', 'controller' => ServiceController::class], function () { 
+
+            Route::get('/index', 'index')->name('index');
+    
+            Route::get('/create', 'create')->name('create');
+    
+            Route::post('/store','store')->name('store');
+    
+            Route::delete('/delete/{id}','delete')->name('delete');
+    
+            Route::get('/edit/{id}', 'edit')->name('edit');
+    
+            Route::put('/update/{id}', 'update')->name('update');
+    
+        });
 
 });
