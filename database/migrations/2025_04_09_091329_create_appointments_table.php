@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->date('day');
+            $table->enum('status' , ['pending' , 'cancelled' , 'completed']);
             $table->foreignId('doctor_id')->references('id')->on('doctors');
             $table->timestamps();
         });
