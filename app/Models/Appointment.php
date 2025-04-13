@@ -14,6 +14,7 @@ class Appointment extends Model
         'end_time',
         'day',
         'doctor_id',
+        'status',
         ];
 
         public function patient()

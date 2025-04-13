@@ -31,7 +31,9 @@ class DatabaseSeeder extends Seeder
             StoreKeeperEmployeeSeeder::class,
             MedicalSuppliesSeeder::class,
             SuppliesRequestSeeder::class,
-            // AppointmentSeeder::class
+            PatientSeeder::class,
+            ClinicSeeder::class,
+            AppointmentSeeder::class,
         ]);
     }
 }
