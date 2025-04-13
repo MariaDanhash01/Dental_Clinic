@@ -61,7 +61,35 @@
 
               </ul>
           </details>
-      </li> 
+    </li> 
+
+    <li class="sidebar-item">
+          <details class="sidebar-details">
+              <summary class="sidebar-link">
+                  <span>
+                    <i class="ti ti-file-description"></i>
+
+                  </span>
+                  <span class="hide-menu">Medical Record</span>
+                  <i class="ti ti-chevron-down arrow-icon"></i>
+              </summary>
+              <ul style="padding-left: 1rem; list-style: none;">
+                 
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('reception.medical-record.index') }}">
+                          <span class="hide-menu">Medical Record Table</span>
+                      </a>
+                  </li>
+
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('reception.medical-record.create') }}">
+                          <span class="hide-menu">Create Medical Record</span>
+                      </a>
+                  </li>
+
+              </ul>
+          </details>
+    </li> 
 
       <li class="sidebar-item">
           <details class="sidebar-details">

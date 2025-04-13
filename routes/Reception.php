@@ -5,7 +5,10 @@ use App\Http\Controllers\Reception\Auth\AuthController;
 use App\Http\Controllers\Reception\ReceptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Reception\Service\ServiceController;
+use App\Http\Controllers\Reception\MedicalRecord\MedicalRecordController;
 
+
+  //=================================== Auth Route =============================
 
 Route::get('/login' , [AuthController::class , 'loginPage'])->name('login.page');
 
@@ -55,6 +58,24 @@ Route::group([ 'middleware' => 'reception.auth'], function () {
             Route::get('/edit/{id}', 'edit')->name('edit');
     
             Route::put('/update/{id}', 'update')->name('update');
+    
+        });
+
+         //=================================== Medical Record Route =============================
+
+         Route::group(['prefix' => 'medical-record', 'as' => 'medical-record.', 'controller' => MedicalRecordController::class], function () { 
+
+            Route::get('/', 'index')->name('index');
+    
+            Route::get('/create', 'create')->name('create');
+    
+            Route::post('/', 'store')->name('store');
+    
+            Route::get('/{medicalRecord}/edit', 'edit')->name('edit');
+    
+            Route::put('/{medicalRecord}', 'update')->name('update');
+    
+            Route::delete('/{medicalRecord}', 'destroy')->name('destroy');
     
         });
 
