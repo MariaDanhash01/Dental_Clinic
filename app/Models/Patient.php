@@ -3,10 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patient extends Model
+class Patient extends Authenticatable
 {
     //
+    protected $guard = 'patient';
+    protected $fillable=[
+        'name',
+        'email',
+        'password',
+        'gender',
+        'status',
+        'age',
+        'phone',
+        'img',
+    ];
+
 
     protected $fillable=[
         'name',
@@ -23,5 +36,29 @@ class Patient extends Model
     public function appointment()
     {
         return $this->hasMany(Appointment::class , 'patient_id');
+    }
+
+    
+     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
     }
 }
