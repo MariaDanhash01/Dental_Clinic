@@ -20,22 +20,14 @@ class Patient extends Authenticatable
         'img',
     ];
 
-
-    protected $fillable=[
-        'name',
-        'email',
-        'password',
-        'gender',
-        'status',
-        'age',
-        'phone',
-        'img',
-    ];
-    
-
-    public function appointment()
+    public function appointments()
     {
-        return $this->hasMany(Appointment::class , 'patient_id');
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
     }
 
     

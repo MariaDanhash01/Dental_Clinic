@@ -17,7 +17,7 @@
             <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
               <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Dentistry in a Calm and Relaxed Environment</h1>
               <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="#" class="btn btn-primary px-4 py-3">Make an Appointment</a></p>
+              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="#" class="btn btn-primary px-4 py-3" data-toggle="modal" data-target="#modalRequest">Make an Appointment</a></p>
             </div>
           </div>
         </div>
@@ -40,82 +40,178 @@
     <section class="ftco-intro">
     	<div class="container">
     		<div class="row no-gutters">
-    			<div class="col-md-3 color-1 p-4">
-    				<h3 class="mb-4">Emergency Cases</h3>
-    				<p>A small river named Duden flows by their place and supplies</p>
-    				<span class="phone-number">+ (123) 456 7890</span>
-    			</div>
-    			<div class="col-md-3 color-2 p-4">
-    				<h3 class="mb-4">Opening Hours</h3>
-    				<p class="openinghours d-flex">
-    					<span>Monday - Friday</span>
-    					<span>8:00 - 19:00</span>
-    				</p>
-    				<p class="openinghours d-flex">
-    					<span>Saturday</span>
-    					<span>10:00 - 17:00</span>
-    				</p>
-    				<p class="openinghours d-flex">
-    					<span>Sunday</span>
-    					<span>10:00 - 16:00</span>
-    				</p>
-    			</div>
-    			<div class="col-md-6 color-3 p-4">
-    				<h3 class="mb-2">Make an Appointment</h3>
-    				<form action="#" class="appointment-form">
-	            <div class="row">
-	            	<div class="col-sm-4">
-	                <div class="form-group">
-			              <div class="select-wrap">
-                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                      <select name="" id="" class="form-control">
-                      	<option value="">Department</option>
-                        <option value="">Teeth Whitening</option>
-                        <option value="">Teeth CLeaning</option>
-                        <option value="">Quality Brackets</option>
-                        <option value="">Modern Anesthetic</option>
-                      </select>
-                    </div>
-			            </div>
-	              </div>
-	              <div class="col-sm-4">
-	                <div class="form-group">
-	                	<div class="icon"><span class="icon-user"></span></div>
-			              <input type="text" class="form-control" id="appointment_name" placeholder="Name">
-			            </div>
-	              </div>
-	              <div class="col-sm-4">
-	                <div class="form-group">
-	                	<div class="icon"><span class="icon-paper-plane"></span></div>
-			              <input type="text" class="form-control" id="appointment_email" placeholder="Email">
-			            </div>
-	              </div>
-	            </div>
-	            <div class="row">
-	              <div class="col-sm-4">
-	                <div class="form-group">
-	                	<div class="icon"><span class="ion-ios-calendar"></span></div>
-	                  <input type="text" class="form-control appointment_date" placeholder="Date">
-	                </div>    
-	              </div>
-	              <div class="col-sm-4">
-	                <div class="form-group">
-	                	<div class="icon"><span class="ion-ios-clock"></span></div>
-	                  <input type="text" class="form-control appointment_time" placeholder="Time">
-	                </div>
-	              </div>
-	              <div class="col-sm-4">
-	                <div class="form-group">
-	                	<div class="icon"><span class="icon-phone2"></span></div>
-	                  <input type="text" class="form-control" id="phone" placeholder="Phone">
-	                </div>
-	              </div>
-	            </div>
-	            
-	            <div class="form-group">
-	              <input type="submit" value="Make an Appointment" class="btn btn-primary">
-	            </div>
-	          </form>
+    			<div class="col-md-12 color-3 p-4">
+    				<!-- Tab Navigation -->
+    				<div class="d-flex justify-content-center mb-4">
+    					<ul class="nav nav-pills" id="myTab" role="tablist" style="gap: 10px;">
+    						<li class="nav-item" role="presentation">
+    							<button class="nav-link active rounded-circle" id="appointments-tab" data-bs-toggle="tab" data-bs-target="#appointments" type="button" role="tab" aria-controls="appointments" aria-selected="true" style="width: 12px; height: 12px; padding: 0; background-color: #007bff;"></button>
+    						</li>
+    						<li class="nav-item" role="presentation">
+    							<button class="nav-link rounded-circle" id="consultations-tab" data-bs-toggle="tab" data-bs-target="#consultations" type="button" role="tab" aria-controls="consultations" aria-selected="false" style="width: 12px; height: 12px; padding: 0; background-color: #6c757d;"></button>
+    						</li>
+    					</ul>
+    				</div>
+
+    				<!-- Tab Content -->
+    				<div class="tab-content" id="myTabContent">
+    					<!-- Appointments Tab -->
+    					<div class="tab-pane fade show active" id="appointments" role="tabpanel" aria-labelledby="appointments-tab">
+    						@if (session('success_message_cancel'))
+    							<div class="alert alert-success alert-dismissible fade show" role="alert">
+    								{{ session('success_message_cancel') }}
+    								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    									<span aria-hidden="true">&times;</span>
+    								</button>
+    							</div>
+    						@endif
+
+    						@if (session('error_message_cancel'))
+    							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    								{{ session('error_message_cancel') }}
+    								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    									<span aria-hidden="true">&times;</span>
+    								</button>
+    							</div>
+    						@endif
+
+    						<h5 class="card-title fw-semibold mb-4">My Appointments</h5>
+    						<div class="table-responsive">
+    							<table class="table text-nowrap mb-0 align-middle">
+    								<thead class="text-dark fs-4">
+    									<tr>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">ID</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Day</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Start Time</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">End Time</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Clinic</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Doctor</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Status</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Actions</h6>
+    										</th>
+    									</tr>
+    								</thead>
+    								<tbody>
+    									@foreach($patient->appointments as $appointment)
+    										<tr>
+    											<th scope="row">{{$appointment->id}}</th>
+    											<td>{{$appointment->day}}</td>
+    											<td>{{$appointment->start_time}}</td>
+    											<td>{{$appointment->end_time}}</td>
+    											<td>{{$appointment->clinic->name ?? '-'}}</td>
+    											<td>{{$appointment->doctor->name ?? '-'}}</td>
+    											<td>
+    												<span class="badge bg-{{$appointment->status == 'pending' ? 'warning' : ($appointment->status == 'completed' ? 'success' : 'danger')}}">
+    													{{ucfirst($appointment->status)}}
+    												</span>
+    											</td>
+    											<td>
+    												@if($appointment->status == 'pending' && $appointment->day != date('Y-m-d'))
+    												<form action="{{ route('patient.appointment.cancel', $appointment->id) }}" method="POST" class="d-inline">
+    													@csrf
+    													@method('PUT')
+    													<input type="hidden" name="status" value="cancelled">
+    													<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to cancel this appointment?')">
+    														Cancel
+    													</button>
+    												</form>
+    												@else
+    													<span class="text-muted">Cannot cancel</span>
+    												@endif
+    											</td>
+    										</tr>
+    									@endforeach
+    								</tbody>
+    							</table>
+    						</div>
+    					</div>
+
+    					<!-- Consultations Tab -->
+    					<div class="tab-pane fade" id="consultations" role="tabpanel" aria-labelledby="consultations-tab">
+    						@if (session('success_message'))
+    							<div class="alert alert-success alert-dismissible fade show" role="alert">
+    								{{ session('success_message') }}
+    								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    									<span aria-hidden="true">&times;</span>
+    								</button>
+    							</div>
+    						@endif
+
+    						@if (session('error_message'))
+    							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    								{{ session('error_message') }}
+    								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    									<span aria-hidden="true">&times;</span>
+    								</button>
+    							</div>
+    						@endif
+
+    						<h5 class="card-title fw-semibold mb-4">My Consultations</h5>
+    						<div class="table-responsive">
+    							<table class="table text-nowrap mb-0 align-middle">
+    								<thead class="text-dark fs-4">
+    									<tr>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">ID</h6>
+    										</th>
+                        <th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Doctor</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Question</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Answer</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Status</h6>
+    										</th>
+    										<th class="border-bottom-0">
+    											<h6 class="fw-semibold mb-0">Created At</h6>
+    										</th>
+    									</tr>
+    								</thead>
+    								<tbody>
+    									@if($patient->consultations && count($patient->consultations) > 0)
+    										@foreach($patient->consultations as $consultation)
+    											<tr>
+    												<th scope="row">{{$consultation->id}}</th>
+    												<td>{{$consultation->doctor->name ?? '-'}}</td>
+    												<td>{{$consultation->question}}</td>
+    												<td>{{$consultation->answer ?? 'Not answered yet'}}</td>
+    												<td>
+    													<span class="badge bg-{{$consultation->status == 'pending' ? 'warning' : 'success'}}">
+    														{{ucfirst($consultation->status)}}
+    													</span>
+    												</td>
+    												<td>{{$consultation->created_at->format('Y-m-d H:i')}}</td>
+    											</tr>
+    										@endforeach
+    									@else
+    										<tr>
+    											<td colspan="5" class="text-center">No consultations found.</td>
+    										</tr>
+    									@endif
+    								</tbody>
+    							</table>
+    						</div>
+    					</div>
+    				</div>
     			</div>
     		</div>
     	</div>
@@ -192,7 +288,7 @@
       					</div>
       					<div class="text">
 	      					<h3>Well Experience Dentist</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	      					<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
       					</div>
       				</div>
       				<div class="list-services d-flex ftco-animate">
@@ -660,42 +756,67 @@
     			</div>
     			<div class="col-md-6 py-5 pl-md-5">
     				<div class="heading-section mb-5 ftco-animate">
-	            <h2 class="mb-2">Get a Free Quote</h2>
+	            <h2 class="mb-2">Submit a consultation request now</h2>
 	          </div>
-	          <form action="#" class="ftco-animate">
-	          	<div class="row">
-	          		<div class="col-md-6">
+			    <!-- Message Section -->
+				@if (session('success_message_consultation'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success_message_consultation') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+
+                                @if (session('error_message_consultation'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ session('error_message_consultation') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                <!-- End Message Section -->
+	          <form action="{{ route('patient.consultation.store') }}" method="post">
+	            @csrf
+	            <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+	            <div class="row">
+	            	
+		            <div class="col-md-6">
 		              <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Full Name">
-		              </div>
-	              </div>
-	              <div class="col-md-6">
-		              <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Email">
-		              </div>
-	              </div>
-	              <div class="col-md-6">
-	              	<div class="form-group">
-		                <input type="text" class="form-control" placeholder="Phone">
+		                <label for="doctor_id" class="form-label">Doctor <span class="text-danger">*</span></label>
+		                <select class="form-control @error('doctor_id') is-invalid @enderror" id="doctor_id" name="doctor_id" required>
+		                  <option value="">Select Doctor</option>
+		                  @foreach($doctors as $doctor)
+		                    <option value="{{ $doctor->id }}" {{ old('doctor_id') == $doctor->id ? 'selected' : '' }}>
+		                      {{ $doctor->name }}
+		                    </option>
+		                  @endforeach
+		                </select>
+		                @error('doctor_id')
+		                  <div class="invalid-feedback">{{ $message }}</div>
+		                @enderror
 		              </div>
 		            </div>
-	              <div class="col-md-6">
-	              	<div class="form-group">
-		                <input type="text" class="form-control" placeholder="Website">
-		              </div>
-		            </div>
+					
+		            
 		            <div class="col-md-12">
 		              <div class="form-group">
-		                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+		                <label for="question" class="form-label">Your Question <span class="text-danger">*</span></label>
+		                <textarea name="question" id="question" cols="30" rows="7" class="form-control @error('question') is-invalid @enderror" placeholder="Please describe your dental concern or question..." required>{{ old('question') }}</textarea>
+		                @error('question')
+		                    <div class="invalid-feedback">{{ $message }}</div>
+		                @enderror
 		              </div>
 		            </div>
-		            <div class="col-md-12">
-		              <div class="form-group">
-		                <input type="submit" value="Get a Quote" class="btn btn-primary py-3 px-5">
-		              </div>
-	              </div>
-              </div>
-            </form>
+	            </div>
+	            <div class="col-md-12">
+	                <div class="form-group">
+	                    <input type="submit" value="Send" class="btn btn-primary py-3 px-5">
+	                </div>
+	            </div>
+	          </form>
+			  
     			</div>
     		</div>
     	</div>
@@ -796,61 +917,160 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="#">
-            <div class="form-group">
-              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
-              <input type="text" class="form-control" id="appointment_name" placeholder="Full Name" name="name">
-			</div>
-            <div class="form-group">
-              <!-- <label for="appointment_email" class="text-black">Email</label> -->
-              <input type="text" class="form-control" id="appointment_email" placeholder="Email" name="email">
+          @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+          @endif
+
+          @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+
+          @if (session('success_message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success_message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+
+          @if (session('error_message'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error_message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+
+          <form action="{{ route('patient.appointment.store') }}" method="post">
+            @csrf
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <!-- <label for="appointment_date" class="text-black">Date</label> -->
-                  <input type="text" class="form-control appointment_date" placeholder="Day" name="day" >
-                </div>    
+                  <label for="clinic_id" class="form-label">Clinic <span class="text-danger">*</span></label>
+                  <select class="form-control @error('clinic_id') is-invalid @enderror" id="clinic_id" name="clinic_id" required>
+                    <option value="">Select Clinic</option>
+                    @foreach($clinics as $clinic)
+                      <option value="{{ $clinic->id }}" {{ old('clinic_id') == $clinic->id ? 'selected' : '' }}>
+                        {{ $clinic->name }}
+                      </option>
+                    @endforeach
+                  </select>
+                  @error('clinic_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+			  <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="doctor_id" class="form-label">Doctor <span class="text-danger">*</span></label>
+                  <select class="form-control @error('doctor_id') is-invalid @enderror" id="doctor_id" name="doctor_id" required>
+                    <option value="">Select Doctor</option>
+                    @foreach($doctors as $doctor)
+                      <option value="{{ $doctor->id }}" {{ old('doctor_id') == $doctor->id ? 'selected' : '' }}>
+                        {{ $doctor->name }}
+                      </option>
+                    @endforeach
+                  </select>
+                  @error('doctor_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="day" class="form-label">Day <span class="text-danger">*</span></label>
+                  <input type="date" class="form-control @error('day') is-invalid @enderror" 
+                    id="day" name="day" value="{{ old('day') }}" required>
+                  @error('day')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <!-- <label for="appointment_time" class="text-black">Time</label> -->
-                  <input type="text" class="form-control appointment_time" placeholder="Time" name="start_time">
+                  <label for="start_time" class="form-label">Start Time <span class="text-danger">*</span></label>
+                  <input type="time" class="form-control @error('start_time') is-invalid @enderror" 
+                    id="start_time" name="start_time" value="{{ old('start_time') }}" required>
+                  @error('start_time')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="end_time" class="form-label">End Time <span class="text-danger">*</span></label>
+                  <input type="time" class="form-control @error('end_time') is-invalid @enderror" 
+                    id="end_time" name="end_time" value="{{ old('end_time') }}" required>
+                  @error('end_time')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
               </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-6">
-				  <div class="form-group">
-					<!-- <label for="appointment_date" class="text-black">Date</label> -->
-					<input type="text" class="form-control appointment_date" placeholder="Clinic" name="clinic_id" >
-				  </div>    
-				</div>
-				<div class="col-md-6">
-				  <div class="form-group">
-					<!-- <label for="appointment_time" class="text-black">Time</label> -->
-					<input type="text" class="form-control appointment_time" placeholder="Doctor" name="doctor_id">
-				  </div>
-				</div>
-			  </div>
-            
-
-            {{-- <div class="form-group">
-              <!-- <label for="appointment_message" class="text-black">Message</label> -->
-              <textarea name="" id="appointment_message" class="form-control" cols="30" rows="10" placeholder="Message"></textarea>
-            </div> --}}
-            <div class="form-group">
-              <input type="submit" value="Make an Appointment" class="btn btn-primary">
+            <div class="form-group text-center mt-4">
+              <button type="submit" class="btn btn-primary">
+                <i class="fa fa-plus me-2"></i>Create Appointment
+              </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                <i class="fa fa-times me-2"></i>Cancel
+              </button>
             </div>
           </form>
         </div>
-        
       </div>
     </div>
   </div>
 
 @include('Layouts.Patient.LinkJS')
     
+<script>
+    // Initialize Bootstrap tabs
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabEl = document.querySelectorAll('button[data-bs-toggle="tab"]');
+        tabEl.forEach(function(tab) {
+            tab.addEventListener('click', function(event) {
+                event.preventDefault();
+                var target = document.querySelector(this.getAttribute('data-bs-target'));
+                var tabContent = document.querySelectorAll('.tab-pane');
+                var tabLinks = document.querySelectorAll('.nav-link');
+                
+                // Hide all tab content
+                tabContent.forEach(function(content) {
+                    content.classList.remove('show', 'active');
+                });
+                
+                // Remove active class from all tab links
+                tabLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                
+                // Show the selected tab content and activate the tab link
+                target.classList.add('show', 'active');
+                this.classList.add('active');
+            });
+        });
+    });
+</script>
   </body>
 </html>
