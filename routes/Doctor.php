@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doctor\Auth\AuthController;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Doctor\Appointment\AppointmentController;
+use App\Http\Controllers\Doctor\Consultation\ConsultationController;
+use App\Http\Controllers\Doctor\SuppliesRequest\SuppliesRequestController;
 
   //=================================== Auth Route =============================
 
@@ -40,4 +42,33 @@ Route::group([ 'middleware' => 'doctor.auth'], function () {
 
     });
 
+    //=================================== Consultation Route =============================
+
+    Route::group(['prefix' => 'consultation', 'as' => 'consultation.', 'controller' => ConsultationController::class], function () { 
+
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/{consultation}/edit', 'edit')->name('edit');
+
+        Route::put('/{consultation}/update', 'update')->name('update');
+
+        Route::delete('/{consultation}/destroy', 'destroy')->name('destroy');
+
+    });
+
+    //=================================== Supplies Request Route =============================
+
+    Route::group(['prefix' => 'supplies-request', 'as' => 'supplies.request.', 'controller' => SuppliesRequestController::class], function () { 
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::get('/{status?}', 'index')->name('index')->defaults('status', 'all');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{suppliesRequest}/edit', 'edit')->name('edit');
+
+        Route::put('/{suppliesRequest}', 'update')->name('update');
+
+    });
 });
