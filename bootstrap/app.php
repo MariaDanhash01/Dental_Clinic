@@ -4,6 +4,7 @@ use App\Http\Middleware\AdminAuthMiddleware;
 use App\Http\Middleware\PatientAuthMiddleware;
 use App\Http\Middleware\ReceptionAuthMiddleware;
 use App\Http\Middleware\StoreKeeperEmployeeAuthMiddleware;
+use App\Http\Middleware\DoctorAuthMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,10 +17,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::middleware('web')
-                ->prefix('admin')
-                ->name('admin.')
-                ->group(base_path('routes/Admin.php'));
+                    ->prefix('admin')
+                    ->name('admin.')
+                    ->group(base_path('routes/Admin.php'));
 
+                Route::middleware('web')
+                ->prefix('doctor')
+                ->name('doctor.')
+                ->group(base_path('routes/Doctor.php'));
+
+            
                 Route::middleware('web')
                 ->prefix('reception')
                 ->name('reception.')
@@ -43,6 +50,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'reception.auth' => ReceptionAuthMiddleware::class,
             'storeKeeperEmployee.auth' => StoreKeeperEmployeeAuthMiddleware::class,
             'patient.auth' => PatientAuthMiddleware::class,
+            'doctor.auth' => DoctorAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

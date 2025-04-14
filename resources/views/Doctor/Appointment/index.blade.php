@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Appointment - {{ ucfirst($status) }}</title>
-    @include('Layouts.Reception.LinkHeader')
+    @include('Layouts.Doctor.LinkHeader')
 </head>
 
 <body>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <!-- Sidebar navigation-->
-                @include('Layouts.Reception.Sidebar')
+                @include('Layouts.Doctor.Sidebar')
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -36,7 +36,7 @@
         <div class="body-wrapper">
 
             <!--  Header Start -->
-            @include('Layouts.Reception.Header')
+            @include('Layouts.Doctor.Header')
             <!--  Header End -->
 
             <div class="container-fluid">
@@ -69,13 +69,13 @@
 
                                     <!-- Status Filter Pills -->
                                     <div class="status-filters">
-                                        <a href="{{ route('reception.appointments.index') }}"
+                                        <a href="{{ route('doctor.appointments.index') }}"
                                             class="btn btn-sm {{ $status == 'all' ? 'btn-primary' : 'btn-outline-primary' }} me-1">All</a>
-                                        <a href="{{ route('reception.appointments.index', 'pending') }}"
+                                        <a href="{{ route('doctor.appointments.index', 'pending') }}"
                                             class="btn btn-sm {{ $status == 'pending' ? 'btn-warning' : 'btn-outline-warning' }} me-1">Pending</a>
-                                        <a href="{{ route('reception.appointments.index', 'completed') }}"
+                                        <a href="{{ route('doctor.appointments.index', 'completed') }}"
                                             class="btn btn-sm {{ $status == 'completed' ? 'btn-success' : 'btn-outline-success' }} me-1">Completed</a>
-                                        <a href="{{ route('reception.appointments.index', 'cancelled') }}"
+                                        <a href="{{ route('doctor.appointments.index', 'cancelled') }}"
                                             class="btn btn-sm {{ $status == 'cancelled' ? 'btn-danger' : 'btn-outline-danger' }}">Cancelled</a>
                                     </div>
                                 </div>
@@ -172,17 +172,17 @@
                                                     <td>{{ $appointment->created_at->format('Y-m-d H:i') }}</td>
                                                     <td>
                                                         @if($appointment->status === 'pending')
-                                                            <a href="{{ route('reception.appointments.edit', $appointment->id) }}" class="btn btn-primary btn-sm">
+                                                            <a href="{{ route('doctor.appointments.edit', $appointment->id) }}" class="btn btn-primary btn-sm">
                                                                 <i class="ti ti-edit"></i> Edit
                                                             </a>
-                                                            <form action="{{ route('reception.appointments.complete', $appointment->id) }}" method="POST" class="d-inline">
+                                                            <form action="{{ route('doctor.appointments.complete', $appointment->id) }}" method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <button type="submit" class="btn btn-success btn-sm">
                                                                     <i class="ti ti-check"></i> Complete
                                                                 </button>
                                                             </form>
-                                                            <form action="{{ route('reception.appointments.cancel', $appointment->id) }}" method="POST" class="d-inline">
+                                                            <form action="{{ route('doctor.appointments.cancel', $appointment->id) }}" method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -208,7 +208,7 @@
             </div>
         </div>
     </div>
-    @include('Layouts.Reception.LinkJS')
+    @include('Layouts.Doctor.LinkJS')
 </body>
 
 </html>
