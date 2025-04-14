@@ -18,12 +18,18 @@ class Patient extends Authenticatable
         'age',
         'phone',
         'img',
-        ];
+    ];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
     
 
-    public function appointment()
+    public function consultations()
     {
-        return $this->hasMany(Appointment::class , 'patient_id');
+        return $this->hasMany(Consultation::class);
     }
 
     

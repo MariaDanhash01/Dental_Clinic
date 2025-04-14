@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Patient\Auth\AuthController;
 use App\Http\Controllers\Patient\PatientsController;
+use App\Http\Controllers\Patient\ConsultationController;
 
 Route::get('/' , [PatientsController::class , 'index'])->name('index');
 
@@ -28,5 +29,18 @@ Route::group([ 'middleware' => 'patient.auth'], function () {
     Route::get('/resetPassword/page' , [AuthController::class , 'resetPasswordPage'])->name('resetPassword.page');
 
     Route::post('/resetPassword' , [AuthController::class , 'resetPassword'])->name('resetPassword');
+
+    //========================================= Appointment Route =========================================
+
+
+    Route::post('/appointment/store', [PatientsController::class, 'store'])->name('appointment.store');
+
+    Route::put('/appointments/cancel/{id}', [PatientsController::class, 'cancelAppointment'])->name('appointment.cancel');
+
+
+    //========================================= Consultation Route =========================================
+
+    
+    Route::POST('/consultation/store', [ConsultationController::class, 'storeConsultation'])->name('consultation.store');
 });
 });
