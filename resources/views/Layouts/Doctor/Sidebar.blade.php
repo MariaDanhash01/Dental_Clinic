@@ -5,7 +5,7 @@
           <span class="hide-menu">Home</span>
       </li>
       <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('reception.index') }}" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('doctor.index') }}" aria-expanded="false">
               <span>
                   <i class="ti ti-layout-dashboard"></i>
               </span>
@@ -35,7 +35,7 @@
           }
       </style>
 
-    <li class="sidebar-item">
+    <!-- <li class="sidebar-item">
           <details class="sidebar-details">
               <summary class="sidebar-link">
                   <span>
@@ -61,35 +61,7 @@
 
               </ul>
           </details>
-    </li> 
-
-    <li class="sidebar-item">
-          <details class="sidebar-details">
-              <summary class="sidebar-link">
-                  <span>
-                    <i class="ti ti-file-description"></i>
-
-                  </span>
-                  <span class="hide-menu">Medical Record</span>
-                  <i class="ti ti-chevron-down arrow-icon"></i>
-              </summary>
-              <ul style="padding-left: 1rem; list-style: none;">
-                 
-                  <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.medical-record.index') }}">
-                          <span class="hide-menu">Medical Record Table</span>
-                      </a>
-                  </li>
-
-                  <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.medical-record.create') }}">
-                          <span class="hide-menu">Create Medical Record</span>
-                      </a>
-                  </li>
-
-              </ul>
-          </details>
-    </li> 
+    </li>  -->
 
       <li class="sidebar-item">
           <details class="sidebar-details">
@@ -102,27 +74,27 @@
               </summary>
               <ul style="padding-left: 1rem; list-style: none;">
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.appointments.create') }}">
+                      <a class="sidebar-link" href="{{ route('doctor.appointments.create') }}">
                           <span class="hide-menu">Create New</span>
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.appointments.index') }}">
+                      <a class="sidebar-link" href="{{ route('doctor.appointments.index') }}">
                           <span class="hide-menu">All</span>
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.appointments.index', 'pending') }}">
+                      <a class="sidebar-link" href="{{ route('doctor.appointments.index', 'pending') }}">
                           <span class="hide-menu">Pending</span>
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.appointments.index', 'cancelled') }}">
+                      <a class="sidebar-link" href="{{ route('doctor.appointments.index', 'cancelled') }}">
                           <span class="hide-menu">Cancelled</span>
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.appointments.index', 'completed') }}">
+                      <a class="sidebar-link" href="{{ route('doctor.appointments.index', 'completed') }}">
                           <span class="hide-menu">Completed</span>
                       </a>
                   </li>
