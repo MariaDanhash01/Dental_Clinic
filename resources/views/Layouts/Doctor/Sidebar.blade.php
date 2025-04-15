@@ -35,33 +35,6 @@
           }
       </style>
 
-    <!-- <li class="sidebar-item">
-          <details class="sidebar-details">
-              <summary class="sidebar-link">
-                  <span>
-                    <i class="ti ti-medical-cross"></i>
-
-                  </span>
-                  <span class="hide-menu">Service</span>
-                  <i class="ti ti-chevron-down arrow-icon"></i>
-              </summary>
-              <ul style="padding-left: 1rem; list-style: none;">
-                 
-                  <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.service.index') }}">
-                          <span class="hide-menu">Service Table</span>
-                      </a>
-                  </li>
-
-                  <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('reception.service.create') }}">
-                          <span class="hide-menu">Create Service</span>
-                      </a>
-                  </li>
-
-              </ul>
-          </details>
-    </li>  -->
 
       <li class="sidebar-item">
           <details class="sidebar-details">
@@ -102,6 +75,93 @@
           </details>
       </li>
 
+
+      <li class="sidebar-item">
+          <details class="sidebar-details">
+              <summary class="sidebar-link">
+                  <span>
+                    <i class="ti ti-clipboard"></i>
+                  </span>
+                  <span class="hide-menu">Supplies Request</span>
+                  <i class="ti ti-chevron-down arrow-icon"></i>
+              </summary>
+              <ul style="padding-left: 1rem; list-style: none;">
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.supplies.request.create') }}">
+                          <span class="hide-menu">Create New Request</span>
+                      </a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.supplies.request.index') }}">
+                          <span class="hide-menu">All Requests</span>
+                      </a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.supplies.request.index', 'pending') }}">
+                          <span class="hide-menu">Pending</span>
+                      </a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.supplies.request.index', 'cancelled') }}">
+                          <span class="hide-menu">Cancelled</span>
+                      </a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.supplies.request.index', 'completed') }}">
+                          <span class="hide-menu">Completed</span>
+                      </a>
+                  </li>
+              </ul>
+          </details>
+      </li>
+
+      <li class="sidebar-item">
+          <details class="sidebar-details">
+              <summary class="sidebar-link">
+                  <span>
+                    <i class="ti ti-messages"></i>
+
+                  </span>
+                  <span class="hide-menu">Consultation</span>
+                  <i class="ti ti-chevron-down arrow-icon"></i>
+              </summary>
+              <ul style="padding-left: 1rem; list-style: none;">
+                 
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.consultation.index') }}">
+                          <span class="hide-menu">Consultation Table</span>
+                      </a>
+                  </li>
+              </ul>
+          </details>
+    </li> 
+
+    <li class="sidebar-item">
+          <details class="sidebar-details">
+              <summary class="sidebar-link">
+                  <span>
+                    <i class="ti ti-clock"></i>
+
+                  </span>
+                  <span class="hide-menu">Nurse Hour</span>
+                  <i class="ti ti-chevron-down arrow-icon"></i>
+              </summary>
+              <ul style="padding-left: 1rem; list-style: none;">
+                 
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.nurse.hour.index') }}">
+                          <span class="hide-menu">Nurse Work Hour Table</span>
+                      </a>
+                  </li>
+
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.nurse.hour.create') }}">
+                          <span class="hide-menu">Create Nurse Work Hour</span>
+                      </a>
+                  </li>
+              </ul>
+          </details>
+    </li> 
   </ul>
 
   {{--     
