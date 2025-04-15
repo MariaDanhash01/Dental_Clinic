@@ -17,9 +17,9 @@ class Service extends Model
         'status',
     ];
 
-    public function storeKeeperEmployee()
+    public function receptionist()
     {
-        return $this->belongsTo(StoreKeeperEmployee::class, 'created_by');
+        return $this->belongsTo(Receptionist::class, 'created_by');
     }
 
 }

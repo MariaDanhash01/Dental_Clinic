@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('more_info');
             $table->string('image')->nullable();
             $table->enum('status' , ['active' , 'inactive']);
-            $table->foreignId('created_by')->nullable()->constrained('store_keeper_employees')->nullOnDelete();
+            $table->foreignId('created_by')->nullable()->constrained('receptionists')->nullOnDelete();
             $table->timestamps();
         });
     }

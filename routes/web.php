@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Patient\Auth\AuthController;
 use App\Http\Controllers\Patient\PatientsController;
 use App\Http\Controllers\Patient\ConsultationController;
-
+use App\Http\Controllers\Patient\ServiceController;
 Route::get('/' , [PatientsController::class , 'index'])->name('index');
 
 Route::group(['prefix' => 'patient', 'as' => 'patient.', 'controller' => PatientsController::class],function () { 
