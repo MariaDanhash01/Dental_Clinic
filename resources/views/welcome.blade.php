@@ -116,6 +116,11 @@
     											<td>{{$appointment->clinic->name ?? '-'}}</td>
     											<td>{{$appointment->doctor->name ?? '-'}}</td>
     											<td>
+    												@php
+    													if($appointment->day < date('Y-m-d') && $appointment->status == 'pending') {
+    														$appointment->status = 'cancelled';
+    													}
+    												@endphp
     												<span class="badge bg-{{$appointment->status == 'pending' ? 'warning' : ($appointment->status == 'completed' ? 'success' : 'danger')}}">
     													{{ucfirst($appointment->status)}}
     												</span>
@@ -179,9 +184,6 @@
     											<h6 class="fw-semibold mb-0">Answer</h6>
     										</th>
     										<th class="border-bottom-0">
-    											<h6 class="fw-semibold mb-0">Status</h6>
-    										</th>
-    										<th class="border-bottom-0">
     											<h6 class="fw-semibold mb-0">Created At</h6>
     										</th>
     									</tr>
@@ -194,11 +196,6 @@
     												<td>{{$consultation->doctor->name ?? '-'}}</td>
     												<td>{{$consultation->question}}</td>
     												<td>{{$consultation->answer ?? 'Not answered yet'}}</td>
-    												<td>
-    													<span class="badge bg-{{$consultation->status == 'pending' ? 'warning' : 'success'}}">
-    														{{ucfirst($consultation->status)}}
-    													</span>
-    												</td>
     												<td>{{$consultation->created_at->format('Y-m-d H:i')}}</td>
     											</tr>
     										@endforeach
@@ -226,50 +223,36 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-tooth-1"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                <h3 class="heading">Teeth Whitening</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-dental-care"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                <h3 class="heading">Teeth Cleaning</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>    
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-tooth-with-braces"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                <h3 class="heading">Quality Brackets</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-anesthesia"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                <h3 class="heading">Modern Anesthetic</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>      
-          </div>
+        @if($services && count($services) > 0)
+        @foreach($services as $service)
+        <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+        		<div class="staff">
+      				<div class="img mb-4" style="background-image: url('{{asset('image/' . $service->image) }}');"></div>
+      				<div class="info text-center">
+      					<h3><a href="teacher-single.html">{{ $service->name }}</a></h3>
+      					<span class="position">{{ $service->description }}</span>
+      					<div class="text">
+	        				
+                <p class="card-text price">Price: ${{ number_format($service->price, 2) }}</p>
+                  <p class="card-text more-info">{{ $service->more_info }}</p>
+                  <p class="card-text status">Status: {{ $service->status }}</p>
+                  <p class="card-text created-by">Created by: {{ $service->receptionist->name ?? 'Unknown' }}</p>
+	        				<ul class="ftco-social">
+			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+			            </ul>
+	        			</div>
+      				</div>
+        		</div>
+        	</div>
+          @endforeach
+          @else
+            <div class="col-12 text-center">
+              <p>No services available at the moment.</p>
+            </div>
+          @endif
         </div>
       </div>
       <div class="container-wrap mt-5">
@@ -279,36 +262,19 @@
       		<div class="col-md-6 d-flex">
       			<div class="about-wrap">
       				<div class="heading-section heading-section-white mb-5 ftco-animate">
-		            <h2 class="mb-2">Dentacare with a personal touch</h2>
-		            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-		          </div>
-      				<div class="list-services d-flex ftco-animate">
-      					<div class="icon d-flex justify-content-center align-items-center">
-      						<span class="icon-check2"></span>
-      					</div>
-      					<div class="text">
-	      					<h3>Well Experience Dentist</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-      					</div>
-      				</div>
-      				<div class="list-services d-flex ftco-animate">
-      					<div class="icon d-flex justify-content-center align-items-center">
-      						<span class="icon-check2"></span>
-      					</div>
-      					<div class="text">
-	      					<h3>High Technology Facilities</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-      					</div>
-      				</div>
-      				<div class="list-services d-flex ftco-animate">
-      					<div class="icon d-flex justify-content-center align-items-center">
-      						<span class="icon-check2"></span>
-      					</div>
-      					<div class="text">
-	      					<h3>Comfortable Clinics</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-      					</div>
-      				</div>
+		            <h2 class="mb-2">Our Specialization</h2>
+		          </div>      				
+                    @foreach($doctors as $doctor)
+                        <div class="list-services d-flex ftco-animate">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-check2"></span>
+                            </div>
+                            <div class="text">
+                                <h3>{{ $doctor->specialization->name }}</h3>
+                                <p>{{ $doctor->specialization->description }}</p>
+                            </div>
+                        </div>
+                    @endforeach
       			</div>
       		</div>
       	</div>
@@ -325,14 +291,15 @@
           </div>
         </div>
         <div class="row">
+          @foreach($doctors as $doctor)
         	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
-      				<div class="img mb-4" style="background-image: url('{{asset('Web_assets/assets/images/person_5.jpg')}}');"></div>
+      				<div class="img mb-4" style="background-image: url('{{asset('image/' . $doctor->img) }}');"></div>
       				<div class="info text-center">
-      					<h3><a href="teacher-single.html">Tom Smith</a></h3>
-      					<span class="position">Dentist</span>
+      					<h3><a href="teacher-single.html">{{ $doctor->name }}</a></h3>
+      					<span class="position">{{ $doctor->specialization->name }}</span>
       					<div class="text">
-	        				<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
+	        				<p>{{ $doctor->specialization->description }}</p>
 	        				<ul class="ftco-social">
 			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -343,66 +310,9 @@
       				</div>
         		</div>
         	</div>
-        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-      				<div class="img mb-4" style="background-image: url('{{asset('Web_assets/assets/images/person_6.jpg')}}');"></div>
-      				<div class="info text-center">
-      					<h3><a href="teacher-single.html">Mark Wilson</a></h3>
-      					<span class="position">Dentist</span>
-      					<div class="text">
-	        				<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-	        				<ul class="ftco-social">
-			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			            </ul>
-	        			</div>
-      				</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-      				<div class="img mb-4" style="background-image: url('{{asset('Web_assets/assets/images/person_7.jpg')}}');"></div>
-      				<div class="info text-center">
-      					<h3><a href="teacher-single.html">Patrick Jacobson</a></h3>
-      					<span class="position">Dentist</span>
-      					<div class="text">
-	        				<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-	        				<ul class="ftco-social">
-			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			            </ul>
-	        			</div>
-      				</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-      				<div class="img mb-4" style="background-image: url('{{asset('Web_assets/assets/images/person_8.jpg')}}');"></div>
-      				<div class="info text-center">
-      					<h3><a href="teacher-single.html">Ivan Dorchsner</a></h3>
-      					<span class="position">System Analyst</span>
-      					<div class="text">
-	        				<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-	        				<ul class="ftco-social">
-			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			            </ul>
-	        			</div>
-      				</div>
-        		</div>
-        	</div>
+          @endforeach
         </div>
-        <div class="row  mt-5 justify-conten-center">
-        	<div class="col-md-8 ftco-animate">
-        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi vero accusantium sunt sit aliquam ipsum molestias autem perferendis, incidunt cumque necessitatibus cum amet cupiditate, ut accusamus. Animi, quo. Laboriosam, laborum.</p>
-        	</div>
-        </div>
+
       </div>
     </section>
 
@@ -532,211 +442,6 @@
     	</div>
     </section>
 
-    <section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2>Subcribe to our Newsletter</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-              <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-8">
-                  <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input type="text" class="form-control" placeholder="Enter email address">
-                      <input type="submit" value="Subscribe" class="submit px-3">
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-		
-		<section class="ftco-section testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-2">Testimony</h2>
-            <span class="subheading">Our Happy Customer Says</span>
-          </div>
-        </div>
-        <div class="row justify-content-center ftco-animate">
-          <div class="col-md-8">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">Marketing Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url('{{asset('Web_assets/assets/images/person_2.jpg')}}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url('{{asset('Web_assets/assets/images/person_3.jpg')}}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url('{{asset('Web_assets/assets/images/person_1.jpg')}}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url('{{asset('Web_assets/assets/images/person_1.jpg')}}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">System Analytics</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-		
-		<section class="ftco-gallery">
-    	<div class="container-wrap">
-    		<div class="row no-gutters">
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('Web_assets/assets/images/gallery-1.jpg')}}');">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('Web_assets/assets/images/gallery-2.jpg')}}');">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('Web_assets/assets/images/gallery-3.jpg')}}');">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('Web_assets/assets/images/gallery-4.jpg')}}');">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-        </div>
-    	</div>
-    </section>
-
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-2">Latest Blog</h2>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('Web_assets/assets/images/image_1.jpg')}}');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry" data-aos-delay="100">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('Web_assets/assets/images/image_2.jpg')}}');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('Web_assets/assets/images/image_3.jpg')}}');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 		
 		<section class="ftco-quote">
     	<div class="container">

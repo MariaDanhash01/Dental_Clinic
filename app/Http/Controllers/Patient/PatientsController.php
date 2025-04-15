@@ -8,6 +8,8 @@ use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Appointment;
+use App\Models\Service;
+
 use Illuminate\Support\Facades\Auth;
 
 class PatientsController extends Controller
@@ -17,14 +19,17 @@ class PatientsController extends Controller
     public function index()
     {
         $clinics = Clinic::all();
-        $doctors = Doctor::all();
+        $doctors = Doctor::with('specialization')->get();
         $patient = Auth::guard('patient')->user();
+        $services = Service::all();
+
+        
         
         if (!$patient) {
             return redirect()->route('patient.login.page')->with('error', 'Please login to view your appointments.');
         }
         
-        return view('welcome', compact('clinics', 'doctors', 'patient'));
+        return view('welcome', compact('clinics', 'doctors', 'patient', 'services'));
     }
 
     public function store(Request $request)
