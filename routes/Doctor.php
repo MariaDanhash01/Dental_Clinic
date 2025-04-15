@@ -6,6 +6,7 @@ use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Doctor\Appointment\AppointmentController;
 use App\Http\Controllers\Doctor\Consultation\ConsultationController;
 use App\Http\Controllers\Doctor\SuppliesRequest\SuppliesRequestController;
+Use App\Http\Controllers\Doctor\NurseHour\NurseWorkHourController;
 
   //=================================== Auth Route =============================
 
@@ -69,6 +70,24 @@ Route::group([ 'middleware' => 'doctor.auth'], function () {
         Route::get('/{suppliesRequest}/edit', 'edit')->name('edit');
 
         Route::put('/{suppliesRequest}', 'update')->name('update');
+
+    });
+
+     //=================================== Nurse Work Hour Route =============================
+
+     Route::group(['prefix' => 'nurse-hour', 'as' => 'nurse.hour.', 'controller' => NurseWorkHourController::class], function () { 
+
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{nurseWorkHour}/edit', 'edit')->name('edit');
+
+        Route::put('/{nurseWorkHour}', 'update')->name('update');
+
+        Route::delete('/{nurseWorkHour}', 'destroy')->name('destroy');
 
     });
 });
