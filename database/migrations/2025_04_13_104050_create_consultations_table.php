@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('question');
             $table->string('answer')->nullable();
-            $table->foreignId('patient_id')->constrained('patients');
-            $table->foreignId('doctor_id')->constrained('doctors');
+            $table->foreignId('patient_id')->nullable()->constrained('patients')->nullOnDelete();
+            $table->foreignId('doctor_id')->nullable()->constrained('doctors')->nullOnDelete();
             $table->timestamps();
         });
     }
