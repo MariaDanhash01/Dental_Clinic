@@ -74,7 +74,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::guard('patient')->logout();
-        return redirect()->route('patient.login.page');
+        return redirect()->route('patient.index');
     }
 
     public function resetPasswordPage()

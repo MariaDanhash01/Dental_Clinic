@@ -79,7 +79,10 @@
                         <label for="exampleInputEmail1" class="form-label">Description</label>
                         <input type="text" class="form-control" id="" aria-describedby="emailHelp" name="description">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a href="{{ route('admin.specialization.index') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
                   </form>
                 </div>
             </div>

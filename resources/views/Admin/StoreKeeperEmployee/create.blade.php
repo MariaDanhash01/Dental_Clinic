@@ -119,8 +119,11 @@
                                 <label for="" class="form-label">Upload image</label>
                                 <input type="file" class="form-control" id="basic-icon-default-image" name="img" required>
                             </div>
-                        </div>                        
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>     
+                        <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a href="{{ route('admin.storeKeeperEmployee.index') }}" class="btn btn-secondary">Cancel</a>
+                    </div>                   
                   </form>
                 </div>
               

@@ -118,8 +118,10 @@
 
 <br>
 
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('admin.clinic.index') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
                             </form>
                         </div>
                     </div>

@@ -140,8 +140,11 @@
                                 @endforeach
                             </select>
                           </di>
-                        </div>                        
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>         
+                        <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a href="{{ route('admin.doctor.index') }}" class="btn btn-secondary">Cancel</a>
+                    </div>               
                   </form>
                 </div>
             </div>
