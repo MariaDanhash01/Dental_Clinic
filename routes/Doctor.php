@@ -8,6 +8,7 @@ use App\Http\Controllers\Doctor\Consultation\ConsultationController;
 use App\Http\Controllers\Doctor\SuppliesRequest\SuppliesRequestController;
 Use App\Http\Controllers\Doctor\NurseHour\NurseWorkHourController;
 Use App\Http\Controllers\Doctor\MedicalRecord\MedicalRecordController;
+Use App\Http\Controllers\Doctor\Radiography\RadioGraphyController;
   //=================================== Auth Route =============================
 
 Route::get('/login' , [AuthController::class , 'loginPage'])->name('login.page');
@@ -106,7 +107,23 @@ Route::group([ 'middleware' => 'doctor.auth'], function () {
         Route::get('/{medicalRecord}/inspections/{inspection}/edit', 'inspectionEdit')->name('inspections.edit');
 
         Route::put('/{medicalRecord}/inspections/{inspection}', 'inspectionUpdate')->name('inspections.update');
-        
+
         Route::delete('/{medicalRecord}/inspections/{inspection}', 'inspectionDestroy')->name('inspections.destroy');
+    });
+
+    //=================================== Radiography Route =============================
+
+    Route::group(['prefix' => 'radiography', 'as' => 'radiography.', 'controller' => RadiographyController::class], function () { 
+
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/{patient}/show', 'show')->name('show');
+
+        Route::get('/create/{patient}', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::delete('/{radiography}', 'destroy')->name('destroy');
+        
     });
 });

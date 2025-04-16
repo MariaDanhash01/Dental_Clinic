@@ -180,7 +180,28 @@
                   </li>       
               </ul>
           </details>
-      </li>
+    </li>
+
+    <li class="sidebar-item">
+          <details class="sidebar-details">
+              <summary class="sidebar-link">
+                  <span>
+                    <i class="ti ti-radioactive"></i>
+                  </span>
+                  <span class="hide-menu">Radiography</span>
+                  <i class="ti ti-chevron-down arrow-icon"></i>
+              </summary>
+              <ul style="padding-left: 1rem; list-style: none;">
+                 <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.radiography.index') }}">
+                          <span class="hide-menu">All Radiography</span>
+                      </a>
+                  </li>     
+                
+              </ul>
+          </details>
+    </li>
+
   </ul>
 
   {{--     
