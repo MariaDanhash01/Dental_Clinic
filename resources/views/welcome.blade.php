@@ -76,7 +76,8 @@
     						@endif
 
     						<h5 class="card-title fw-semibold mb-4">My Appointments</h5>
-    						<div class="table-responsive">
+                @if(Auth::guard('patient')->check())
+     						<div class="table-responsive">
     							<table class="table text-nowrap mb-0 align-middle">
     								<thead class="text-dark fs-4">
     									<tr>
@@ -144,6 +145,12 @@
     								</tbody>
     							</table>
     						</div>
+                @else
+                  <div class="alert alert-danger">
+                    Please login to view your appointments.
+                  </div>
+                @endif
+
     					</div>
 
     					<!-- Consultations Tab -->
@@ -167,6 +174,7 @@
     						@endif
 
     						<h5 class="card-title fw-semibold mb-4">My Consultations</h5>
+                @if(Auth::guard('patient')->check())
     						<div class="table-responsive">
     							<table class="table text-nowrap mb-0 align-middle">
     								<thead class="text-dark fs-4">
@@ -207,6 +215,11 @@
     								</tbody>
     							</table>
     						</div>
+                            @else
+                              <div class="alert alert-danger">
+                                Please login to view your consultations.
+                              </div>
+                            @endif
     					</div>
     				</div>
     			</div>
@@ -214,6 +227,7 @@
     	</div>
     </section>
   
+    <div id="services">
     <section class="ftco-section ftco-services">
       <div class="container">
       	<div class="row justify-content-center mb-5 pb-5">
@@ -255,6 +269,7 @@
           @endif
         </div>
       </div>
+      <div id="specialization">
       <div class="container-wrap mt-5">
       	<div class="row d-flex no-gutters">
       		<div class="col-md-6 img" style="background-image: url('{{asset('Web_assets/assets/images/about-2.jpg')}}');">
@@ -279,9 +294,10 @@
       		</div>
       	</div>
       </div>
+      </div>
     </section>
 
-
+<div id="doctors">
     <section class="ftco-section">
       <div class="container">
       	<div class="row justify-content-center mb-5 pb-5">
@@ -315,6 +331,7 @@
 
       </div>
     </section>
+                            </div>
 
     <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url('{{asset('Web_assets/assets/images/bg_1.jpg')}}');" data-stellar-background-ratio="0.5">
     	<div class="container">
@@ -442,7 +459,7 @@
     	</div>
     </section>
 
-		
+<div id="consultations">
 		<section class="ftco-quote">
     	<div class="container">
     		<div class="row">
@@ -482,6 +499,7 @@
                                     </div>
                                 @endif
                                 <!-- End Message Section -->
+                                @if(Auth::guard('patient')->check())
 	          <form action="{{ route('patient.consultation.store') }}" method="post">
 	            @csrf
 	            <input type="hidden" name="patient_id" value="{{ $patient->id }}">
@@ -521,11 +539,17 @@
 	                </div>
 	            </div>
 	          </form>
-			  
+            </div>
+                @else
+                  <div class="alert alert-danger">
+                    Please login to send a consultation request.
+                  </div>
+                @endif
     			</div>
     		</div>
     	</div>
     </section>
+</div>
 		
 		<div id="map"></div>
 
@@ -547,39 +571,12 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Quick Links</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Specialization</a></li>
                 <li><a href="#" class="py-2 d-block">Features</a></li>
                 <li><a href="#" class="py-2 d-block">Projects</a></li>
                 <li><a href="#" class="py-2 d-block">Blog</a></li>
                 <li><a href="#" class="py-2 d-block">Contact</a></li>
               </ul>
-            </div>
-          </div>
-          <div class="col-md-4 pr-md-4">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Recent Blog</h2>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url('{{asset('Web_assets/assets/images/image_1.jpg')}}');"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url('{{asset('Web_assets/assets/images/image_2.jpg')}}');"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           <div class="col-md-3">
@@ -662,6 +659,7 @@
             </div>
           @endif
 
+          @if(Auth::guard('patient')->check())
           <form action="{{ route('patient.appointment.store') }}" method="post">
             @csrf
             <div class="row">
@@ -681,7 +679,7 @@
                   @enderror
                 </div>
               </div>
-			  <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+			       <input type="hidden" name="patient_id" value="{{ $patient->id }}">
 
               <div class="col-md-6">
                 <div class="form-group">
@@ -741,7 +739,12 @@
                 <i class="fa fa-times me-2"></i>Cancel
               </button>
             </div>
-          </form>
+         </form>
+         @else
+                  <div class="alert alert-danger">
+                    Please login to create an appointment.
+                  </div>
+                @endif
         </div>
       </div>
     </div>

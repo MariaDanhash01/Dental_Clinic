@@ -141,25 +141,19 @@
                                           <td>{{$nurse->created_at}}</td>
                                           <td>{{$nurse->updated_at}}</td>
                                           <td>
-                                              <div class="dropdown">
-                                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                      <i class="bx bx-dots-vertical-rounded"></i>
-                                                  </button>
-                                                  <div class="dropdown-menu">
-                                                      <form method="post" action="{{route('admin.nurse.delete' ,$nurse->id)}}">
-                                                          @csrf
-                                                          @method('delete')
-                                                          <button class="dropdown-item btn" type="submit">
-                                                              <i class="bx bx-trash me-1"></i> Delete
-                                                          </button>
-                                                      </form>                                                        
-                                                        <a href="{{route('admin.nurse.edit',$nurse->id)}}" class="dropdown-item btn" type="submit">
-                                                            <i class="bx bx-trash me-1"></i> Edit
-                                                        </a>
-                                                    
-                                                  </div>
-                                              </div>
-                                          </td>
+                                        <div class="d-flex">
+                                            <a href="{{ route('admin.nurse.edit', $nurse->id) }}" class="btn btn-primary btn-sm me-2">
+                                                <i class="ti ti-edit"></i>
+                                            </a>    
+                                            <form action="{{ route('admin.nurse.delete', $nurse->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+</td>
                                       </tr>
                                   @endforeach                    
                     </tbody>

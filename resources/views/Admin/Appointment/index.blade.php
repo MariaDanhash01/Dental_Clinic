@@ -81,13 +81,13 @@
                           <h6 class="fw-semibold mb-0">End Time</h6>
                       </th>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Patient Number</h6>
+                        <h6 class="fw-semibold mb-0">Patient Name</h6>
                       </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Clinic Number</h6>
+                          <h6 class="fw-semibold mb-0">Clinic Name</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Doctor Number</h6>
+                          <h6 class="fw-semibold mb-0">Doctor Name</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Created Date</h6>
@@ -104,7 +104,7 @@
                                           <td>{{$appointment->day}}</td>
                                           <td>{{$appointment->start_time}}</td>
                                           <td>{{$appointment->end_time}}</td>
-                                          <td>{{$appointment->patient->id ?? '-'}}</td>
+                                          <td>{{$appointment->patient->name ?? '-'}}</td>
                                           <td>{{$appointment->clinic->name ?? '-'}}</td>
                                           <td>{{$appointment->doctor->name ?? '-'}}</td>
                                           <td>{{$appointment->created_at}}</td>

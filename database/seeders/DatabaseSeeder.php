@@ -34,7 +34,6 @@ class DatabaseSeeder extends Seeder
             AppointmentSeeder::class,
             MedicalSuppliesSeeder::class,
             SuppliesRequestSeeder::class,
-            ServiceSeeder::class,
             NurseSeeder::class,
         ]);
     }

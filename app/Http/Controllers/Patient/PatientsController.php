@@ -22,12 +22,6 @@ class PatientsController extends Controller
         $doctors = Doctor::with('specialization')->get();
         $patient = Auth::guard('patient')->user();
         $services = Service::all();
-
-        
-        
-        if (!$patient) {
-            return redirect()->route('patient.login.page')->with('error', 'Please login to view your appointments.');
-        }
         
         return view('welcome', compact('clinics', 'doctors', 'patient', 'services'));
     }

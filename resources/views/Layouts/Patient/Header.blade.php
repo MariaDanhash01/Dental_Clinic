@@ -10,11 +10,10 @@
         @if (Auth::guard('patient')->check())
       
         <li class="nav-item active"><a href="{{ route('index') }}" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-        <li class="nav-item"><a href="doctors.html" class="nav-link">Doctors</a></li>
-        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="#specialization" class="nav-link">Specialization</a></li>
+        <li class="nav-item"><a href="#doctors" class="nav-link">Doctors</a></li>
+        <li class="nav-item"><a href="#consultations" class="nav-link">Consultations</a></li>
         <li class="nav-item cta"><a href="#" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
       
         <!-- User Dropdown -->
@@ -39,11 +38,9 @@
         @else
       
         <li class="nav-item active"><a href="{{ route('index') }}" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-        <li class="nav-item"><a href="doctors.html" class="nav-link">Doctors</a></li>
-        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="#specialization" class="nav-link">Specialization</a></li>
+        <li class="nav-item"><a href="#doctors" class="nav-link">Doctors</a></li>
         <li class="nav-item cta"><a href="{{route('patient.register.page')}}" class="nav-link"><span>Sign up</span></a></li>
         <li class="nav-item cta"><a href="{{route('patient.login.page')}}" class="nav-link" ><span>Make an Appointment</span></a></li>
       

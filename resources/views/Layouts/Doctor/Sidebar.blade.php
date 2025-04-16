@@ -162,6 +162,32 @@
               </ul>
           </details>
     </li> 
+
+    <li class="sidebar-item">
+          <details class="sidebar-details">
+              <summary class="sidebar-link">
+                  <span>
+                    <i class="ti ti-clipboard"></i>
+                  </span>
+                  <span class="hide-menu">Inspection</span>
+                  <i class="ti ti-chevron-down arrow-icon"></i>
+              </summary>
+              <ul style="padding-left: 1rem; list-style: none;">
+              <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.inspection.index') }}">
+                          <span class="hide-menu">All Inspections</span>
+                      </a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link" href="{{ route('doctor.inspection.create') }}">
+                          <span class="hide-menu">Create New Inspection</span>
+                      </a>
+                  </li>
+                  
+                  
+              </ul>
+          </details>
+      </li>
   </ul>
 
   {{--     
