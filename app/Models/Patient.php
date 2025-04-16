@@ -32,6 +32,11 @@ class Patient extends Authenticatable
         return $this->hasMany(Consultation::class);
     }
 
+    public function radiographies()
+    {
+        return $this->hasMany(Radiography::class , 'patient_id');
+    }
+
     
      /**
      * The attributes that should be hidden for serialization.
