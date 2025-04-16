@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Medical Record</title>
-@include('Layouts.Reception.LinkHeader')
+@include('Layouts.Doctor.LinkHeader')
 </head>
 
 <body>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <!-- Sidebar navigation-->
-        @include('Layouts.Reception.Sidebar')
+        @include('Layouts.Doctor.Sidebar')
         <!-- End Sidebar navigation -->
         
        
@@ -37,7 +37,7 @@
     <div class="body-wrapper">
 
       <!--  Header Start -->
-      @include('Layouts.Reception.Header')
+      @include('Layouts.Doctor.Header')
       <!--  Header End -->
 
       <div class="container-fluid">
@@ -46,6 +46,15 @@
             <div class="card w-100">
               <div class="card-body p-4">
   
+              @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
   
                  {{-- message Section --}}
           @if (session('success_message'))
@@ -64,9 +73,6 @@
       {{-- end message Section --}}
   
                 <h5 class="card-title fw-semibold mb-4">Medical Record Table</h5>
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="{{ route('reception.medical-record.create') }}" class="btn btn-primary">Create New Record</a>
-                </div>
                 <div class="table-responsive">
                     <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
@@ -117,16 +123,9 @@
                                     <td>{{$medicalRecord->updated_at}}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('reception.medical-record.edit', $medicalRecord) }}" class="btn btn-primary btn-sm me-2">
-                                                <i class="ti ti-edit"></i>
+                                            <a href="{{ route('doctor.medical.record.inspections.index', $medicalRecord) }}" class="btn btn-primary btn-sm me-2">
+                                                <i class="ti ti-eye"></i>
                                             </a>
-                                            <form action="{{ route('reception.medical-record.destroy', $medicalRecord) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="ti ti-trash"></i>
-                                                </button>
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -142,7 +141,7 @@
       </div>
     </div>
   </div>
- @include('Layouts.Reception.LinkJS')
+ @include('Layouts.Doctor.LinkJS')
 </body>
 
 </html>

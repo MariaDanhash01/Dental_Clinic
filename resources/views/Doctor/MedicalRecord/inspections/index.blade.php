@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Medical Record</title>
-@include('Layouts.Reception.LinkHeader')
+  <title>Inspections</title>
+@include('Layouts.Doctor.LinkHeader')
 </head>
 
 <body>
@@ -25,19 +25,16 @@
           </div>
         </div>
         <!-- Sidebar navigation-->
-        @include('Layouts.Reception.Sidebar')
+        @include('Layouts.Doctor.Sidebar')
         <!-- End Sidebar navigation -->
-        
-       
       </div>
       <!-- End Sidebar scroll-->
     </aside>
     <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
-
       <!--  Header Start -->
-      @include('Layouts.Reception.Header')
+      @include('Layouts.Doctor.Header')
       <!--  Header End -->
 
       <div class="container-fluid">
@@ -46,57 +43,59 @@
             <div class="card w-100">
               <div class="card-body p-4">
   
+              @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
+                {{-- message Section --}}
+                @if (session('success_message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success_message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+                @if (session('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error_message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+                {{-- end message Section --}}
   
-                 {{-- message Section --}}
-          @if (session('success_message'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-              {{ session('success_message') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-      @endif
-  
-      @if (session('error_message'))
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              {{ session('error_message') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-      @endif
-      {{-- end message Section --}}
-  
-                <h5 class="card-title fw-semibold mb-4">Medical Record Table</h5>
+                <h5 class="card-title fw-semibold mb-4">Inspections for Medical Record #{{ $medicalRecord->id }}</h5>
                 <div class="d-flex justify-content-end mb-3">
-                    <a href="{{ route('reception.medical-record.create') }}" class="btn btn-primary">Create New Record</a>
+                    <a href="{{ route('doctor.medical.record.inspections.create', $medicalRecord) }}" class="btn btn-primary">
+                        <i class="ti ti-plus"></i> Add New Inspection
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
                             <tr>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">ID</h6>
-                                </th>
-                                <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Name</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Patient ID</h6>
+                                    <h6 class="fw-semibold mb-0">Date & Time</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Patient Name</h6>
+                                    <h6 class="fw-semibold mb-0">Result</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Patient Email</h6>
+                                    <h6 class="fw-semibold mb-0">Medicine</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Patient Phone</h6>
+                                    <h6 class="fw-semibold mb-0">Next Inspection</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Created By</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Created Date</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Last Updated Date</h6>
+                                    <h6 class="fw-semibold mb-0">Doctor</h6>
                                 </th>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Actions</h6>
@@ -104,23 +103,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($medicalRecords as $medicalRecord)
+                            @forelse($inspections as $inspection)
                                 <tr>
-                                    <th scope="row">{{$medicalRecord->id}}</th>
-                                    <td>{{$medicalRecord->name}}</td>
-                                    <td>{{$medicalRecord->patient->id ?? '-'}}</td>
-                                    <td>{{$medicalRecord->patient->name ?? '-'}}</td>
-                                    <td>{{$medicalRecord->patient->email ?? '-'}}</td>
-                                    <td>{{$medicalRecord->patient->phone ?? '-'}}</td>                   
-                                    <td>{{$medicalRecord->reception->name ?? '-'}}</td>
-                                    <td>{{$medicalRecord->created_at}}</td>
-                                    <td>{{$medicalRecord->updated_at}}</td>
+                                    <td>{{ $inspection->name }}</td>
+                                    <td>{{ $inspection->date_time->format('Y-m-d H:i') }}</td>
+                                    <td>{{ $inspection->result }}</td>
+                                    <td>{{ $inspection->medicine }}</td>
+                                    <td>{{ $inspection->next_inspection_date->format('Y-m-d') }}</td>
+                                    <td>{{ $inspection->doctor->name }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('reception.medical-record.edit', $medicalRecord) }}" class="btn btn-primary btn-sm me-2">
+                                            <a href="{{ route('doctor.medical.record.inspections.edit', [$medicalRecord, $inspection]) }}" 
+                                               class="btn btn-info btn-sm me-2">
                                                 <i class="ti ti-edit"></i>
                                             </a>
-                                            <form action="{{ route('reception.medical-record.destroy', $medicalRecord) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                            <form action="{{ route('doctor.medical.record.inspections.destroy', [$medicalRecord, $inspection]) }}" 
+                                                  method="POST" 
+                                                  class="d-inline"
+                                                  onsubmit="return confirm('Are you sure you want to delete this inspection?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -130,7 +130,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach                    
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">No inspections found.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -138,11 +142,10 @@
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
- @include('Layouts.Reception.LinkJS')
+  @include('Layouts.Doctor.LinkJS')
 </body>
 
-</html>
+</html> 
