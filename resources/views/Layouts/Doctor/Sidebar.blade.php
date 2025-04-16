@@ -167,24 +167,17 @@
           <details class="sidebar-details">
               <summary class="sidebar-link">
                   <span>
-                    <i class="ti ti-clipboard"></i>
+                    <i class="ti ti-file"></i>
                   </span>
-                  <span class="hide-menu">Inspection</span>
+                  <span class="hide-menu">Medical Record</span>
                   <i class="ti ti-chevron-down arrow-icon"></i>
               </summary>
               <ul style="padding-left: 1rem; list-style: none;">
               <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('doctor.inspection.index') }}">
-                          <span class="hide-menu">All Inspections</span>
+                      <a class="sidebar-link" href="{{ route('doctor.medical.record.index') }}">
+                          <span class="hide-menu">All Medical Records</span>
                       </a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('doctor.inspection.create') }}">
-                          <span class="hide-menu">Create New Inspection</span>
-                      </a>
-                  </li>
-                  
-                  
+                  </li>       
               </ul>
           </details>
       </li>

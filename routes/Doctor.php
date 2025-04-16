@@ -7,7 +7,7 @@ use App\Http\Controllers\Doctor\Appointment\AppointmentController;
 use App\Http\Controllers\Doctor\Consultation\ConsultationController;
 use App\Http\Controllers\Doctor\SuppliesRequest\SuppliesRequestController;
 Use App\Http\Controllers\Doctor\NurseHour\NurseWorkHourController;
-
+Use App\Http\Controllers\Doctor\MedicalRecord\MedicalRecordController;
   //=================================== Auth Route =============================
 
 Route::get('/login' , [AuthController::class , 'loginPage'])->name('login.page');
@@ -89,5 +89,24 @@ Route::group([ 'middleware' => 'doctor.auth'], function () {
 
         Route::delete('/{nurseWorkHour}', 'destroy')->name('destroy');
 
+    });
+
+      //=================================== Medical Record Route =============================
+
+      Route::group(['prefix' => 'medical-record', 'as' => 'medical.record.', 'controller' => MedicalRecordController::class], function () { 
+
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/{medicalRecord}/inspections', 'inspectionIndex')->name('inspections.index');
+
+        Route::get('/{medicalRecord}/inspections/create', 'inspectionCreate')->name('inspections.create');
+
+        Route::post('/{medicalRecord}/inspections', 'inspectionStore')->name('inspections.store');
+
+        Route::get('/{medicalRecord}/inspections/{inspection}/edit', 'inspectionEdit')->name('inspections.edit');
+
+        Route::put('/{medicalRecord}/inspections/{inspection}', 'inspectionUpdate')->name('inspections.update');
+        
+        Route::delete('/{medicalRecord}/inspections/{inspection}', 'inspectionDestroy')->name('inspections.destroy');
     });
 });

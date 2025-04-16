@@ -2,23 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Inspection extends Model
 {
+    use HasFactory;
+
     //
     protected $fillable = 
     [
-        'name',
-        'date_time',
-        'result',
-        'medicine',
-        'next_inspection_date'
+      'name',
+      'date_time',
+      'result',
+      'medicine',
+      'next_inspection_date',
+      'medical_record_id',
+      'doctor_id'
     ];
 
-    public function patient()
+    protected $casts = [
+        'date_time' => 'datetime',
+        'next_inspection_date' => 'date'
+    ];
+
+    public function medicalRecord()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(MedicalRecord::class);
     }
 
     public function doctor()

@@ -8,7 +8,7 @@ class MedicalRecord extends Model
 {
     //
     protected $fillable = [
-        'name',
+         'name',
          'patient_id',
          'created_by'
         ];
@@ -18,8 +18,13 @@ class MedicalRecord extends Model
         return $this->belongsTo(Patient::class , 'patient_id');
     }
 
-    public function storeKeeperEmployee()
+    public function reception()
     {
-        return $this->belongsTo(StoreKeeperEmployee::class , 'created_by');
+        return $this->belongsTo(Receptionist::class , 'created_by');
+    }
+
+    public function inspections()
+    {
+        return $this->hasMany(Inspection::class , 'medical_record_id');
     }
 }

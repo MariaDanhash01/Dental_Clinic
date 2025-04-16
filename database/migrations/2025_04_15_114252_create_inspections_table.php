@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->dateTime('date_time');
             $table->string('result');
-            $table->string('medicine');
-            $table->dateTime('next_inspection_date');
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+            $table->text('medicine');
+            $table->date('next_inspection_date');
+            $table->foreignId('medical_record_id')->constrained('medical_records')->onDelete('cascade');
             $table->foreignId('doctor_id')->nullable()->constrained('doctors')->nullOnDelete();
             $table->timestamps();
         });
