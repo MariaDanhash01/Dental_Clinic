@@ -5,6 +5,7 @@ use \App\Http\Controllers\Patient\Auth\AuthController;
 use App\Http\Controllers\Patient\PatientsController;
 use App\Http\Controllers\Patient\ConsultationController;
 use App\Http\Controllers\Patient\ServiceController;
+use App\Http\Controllers\Patient\medicalRecordController;
 
 Route::get('/' , [PatientsController::class , 'index'])->name('index');
 
@@ -43,5 +44,10 @@ Route::group([ 'middleware' => 'patient.auth'], function () {
 
     
     Route::POST('/consultation/store', [ConsultationController::class, 'storeConsultation'])->name('consultation.store');
+
+
+    //======================================== Medical record ==============================================
+
+    Route::get('/medical-records', [MedicalRecordController::class, 'index'])->name('medical-records');
 });
 });

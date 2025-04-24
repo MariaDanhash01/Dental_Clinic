@@ -91,7 +91,7 @@ Route::group([ 'middleware' => 'doctor.auth'], function () {
         Route::delete('/{nurseWorkHour}', 'destroy')->name('destroy');
 
     });
-
+    
       //=================================== Medical Record Route =============================
 
       Route::group(['prefix' => 'medical-record', 'as' => 'medical.record.', 'controller' => MedicalRecordController::class], function () { 
